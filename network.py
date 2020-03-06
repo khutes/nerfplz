@@ -1,6 +1,6 @@
 import time
 import socket
-from threading
+from threading import Thread
 
 class Socket:
     def __init__(self, sock=None):
@@ -104,7 +104,5 @@ def createServer():
         (clientsocket, address) = serversocket.accept()
         # now do something with the clientsocket
         # in this case, we'll pretend this is a threaded server
-        t = threading.Thread(target=client_thread, args=(clientsocket, address[0], address[1]))
-        t.daemon = True
-        t.start()
+        t = Thread(target=client_thread, args=(clientsocket, address[0], address[1]), daemon=True).start()
         
