@@ -29,8 +29,13 @@ class Socket:
         chunks = []
         bytes_recd = 0
 
-        chunks.append(self.sock.recv(1).decode())
+        chunk = self.sock.recv(1).decode()
+        if chunk == '':
+            raise RuntimeError("socket connection broken")
+
+        chunks.append(chunk)
         MSGLEN = ''.join(chunks)
+
         while MSGLEN[-1] != "x":
             chunks.append(self.sock.recv(1).decode())
             MSGLEN = ''.join(chunks)
@@ -40,8 +45,6 @@ class Socket:
 
         while bytes_recd < MSGLEN:
             chunk = self.sock.recv(min(MSGLEN - bytes_recd, 2048)).decode()
-            if chunk == '':
-                raise RuntimeError("socket connection broken")
             chunks.append(chunk)
             bytes_recd = bytes_recd + len(chunk)
         return ''.join(chunks)
@@ -72,8 +75,12 @@ def createClient():
 def client_thread(socket, ip, port):
     s = Socket(socket)
     while True:
-        msg = s.receive()
-        print(msg)
+        try:
+            msg = s.receive()
+            print(msg)
+        except:
+            print("Error. Closing connection...")
+            return
 
 
 def createServer():
