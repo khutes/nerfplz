@@ -67,9 +67,13 @@ def createClient():
     mySocket.connect(piAddress, 8080)
 
     while True:
-        msg = input("What message do you want to send?\n\nEnter: ")
-        mySocket.send(msg)
-        print("message sent\n")
+        try:
+            msg = input("Enter Message: ")
+            mySocket.send(msg)
+            print("message sent\n")
+        except:
+            print("Send error. Closing connection...")
+            break
 
 
 def client_thread(socket, ip, port):
@@ -80,7 +84,7 @@ def client_thread(socket, ip, port):
             print(msg)
         except:
             print("Error. Closing connection...")
-            return
+            break
 
 
 def createServer():
