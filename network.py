@@ -10,6 +10,9 @@ class Socket:
         else:
             self.sock = sock
 
+    def __del__(self):
+        self.sock.close()
+
     def connect(self, host, port):
         self.sock.connect((host, port))
 
@@ -101,4 +104,4 @@ def createServer():
         (clientsocket, address) = serversocket.accept()
         # now do something with the clientsocket
         # in this case, we'll pretend this is a threaded server
-        Thread(target=client_thread, args=(clientsocket, address[0], address[1])).start()
+        Thread(target=client_thread, args=(clientsocket, address[0], address[1]), daemon=True).start()
