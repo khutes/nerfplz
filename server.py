@@ -1,5 +1,3 @@
-from gpiozero import LED
-from gpiozero import Button
 from time import sleep
 import socket
 from threading import Thread
@@ -66,9 +64,3 @@ while True:
     # in this case, we'll pretend this is a threaded server
     Thread(target=client_thread, args=(clientsocket, address[0], address[1])).start()
     
-red_1 = LED(12)
-red_1.on()
-
-sleep(2)
-
-red_1.off()

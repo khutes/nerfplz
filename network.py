@@ -1,8 +1,8 @@
-import socket
 import time
+import socket
+from threading import Thread
 
-
-class CustomSocket:
+class Socket:
     def __init__(self, sock=None):
         if sock is None:
             self.sock = socket.socket(
@@ -28,31 +28,66 @@ class CustomSocket:
     def receive(self):
         chunks = []
         bytes_recd = 0
-        MSGLEN = 2
+
+        chunks.append(self.sock.recv(1).decode())
+        MSGLEN = ''.join(chunks)
+        while MSGLEN[-1] != "x":
+            chunks.append(self.sock.recv(1).decode())
+            MSGLEN = ''.join(chunks)
+
+        MSGLEN = int(MSGLEN[:-1])
+        chunks = []
+
         while bytes_recd < MSGLEN:
-            chunk = self.sock.recv(min(MSGLEN - bytes_recd, 2048))
-            if chunk == b'':
+            chunk = self.sock.recv(min(MSGLEN - bytes_recd, 2048)).decode()
+            if chunk == '':
                 raise RuntimeError("socket connection broken")
             chunks.append(chunk)
             bytes_recd = bytes_recd + len(chunk)
-        return b''.join(chunks)
+        return ''.join(chunks)
 
 
-# create an INET, STREAMing socket
-s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+def createClient():
 
-CustomSocket = CustomSocket(s)
+    # create an INET, STREAMing socket
+    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
-hostname = socket.gethostname()
-address = socket.gethostbyname(hostname)
-# print("Host Name: " + hostname + "\nAddress: " + address)
+    mySocket = Socket(s)
 
-piAddress = socket.gethostbyname("raspberrypi")
-# print("Pi Address: " + piAddress)
+    # hostname = socket.gethostname()
+    # address = socket.gethostbyname(hostname)
+    # print("Host Name: " + hostname + "\nAddress: " + address)
 
-CustomSocket.connect(piAddress, 8080)
+    piAddress = socket.gethostbyname("raspberrypi")
+    # print("Pi Address: " + piAddress)
 
-while True:
-    msg = input("What message do you want to send?\n\nEnter: ")
-    CustomSocket.send(msg)
-    print("message sent\n")
+    mySocket.connect(piAddress, 8080)
+
+    while True:
+        msg = input("What message do you want to send?\n\nEnter: ")
+        mySocket.send(msg)
+        print("message sent\n")
+
+
+def client_thread(socket, ip, port):
+    s = CustomSocket(socket)
+    while True:
+        msg = s.receive()
+        print(msg)
+
+
+def createServer():
+    # create an INET, STREAMing socket
+    serversocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    # bind the socket to a public host, and a well-known port
+    serversocket.bind(("0.0.0.0", 8080))
+    # become a server socket
+    print(socket.gethostname())
+    serversocket.listen(1)
+
+    while True:
+        # accept connections from outside
+        (clientsocket, address) = serversocket.accept()
+        # now do something with the clientsocket
+        # in this case, we'll pretend this is a threaded server
+        Thread(target=client_thread, args=(clientsocket, address[0], address[1])).start()
