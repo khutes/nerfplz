@@ -70,7 +70,7 @@ def createClient():
 
 
 def client_thread(socket, ip, port):
-    s = CustomSocket(socket)
+    s = Socket(socket)
     while True:
         msg = s.receive()
         print(msg)

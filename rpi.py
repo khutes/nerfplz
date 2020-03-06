@@ -1,3 +1,3 @@
 import network
 
-network.createServer
+network.createServer()
