@@ -104,4 +104,6 @@ def createServer():
         (clientsocket, address) = serversocket.accept()
         # now do something with the clientsocket
         # in this case, we'll pretend this is a threaded server
-        Thread(target=client_thread, args=(clientsocket, address[0], address[1]), daemon=True).start()
+        t = Thread(target=client_thread, args=(clientsocket, address[0], address[1])).start()
+        t.daemon = True
+        
