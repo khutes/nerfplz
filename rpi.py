@@ -3,7 +3,7 @@ from gpiozero import LED
 
 light = LED(12)
 
-network.Socket s = network.createServer()
+s = network.createServer()
 
 while True:
     try:
