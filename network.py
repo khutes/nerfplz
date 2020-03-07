@@ -64,8 +64,11 @@ def createClient():
     # address = socket.gethostbyname(hostname)
     # print("Host Name: " + hostname + "\nAddress: " + address)
 
-    piAddress = socket.gethostbyname("raspberrypi")
+    # piAddress = socket.gethostbyname("raspberrypi")
+    # print(socket.gethostbyname("raspberrypi"))
+    # exit(0)
     # print("Pi Address: " + piAddress)
+    piAddress = "192.168.1.8"
 
     mySocket.connect(piAddress, 8080)
 
@@ -104,5 +107,5 @@ def createServer():
         (clientsocket, address) = serversocket.accept()
         # now do something with the clientsocket
         # in this case, we'll pretend this is a threaded server
-        t = Thread(target=client_thread, args=(clientsocket, address[0], address[1]), daemon=True).start()
+        Thread(target=client_thread, args=(clientsocket, address[0], address[1]), daemon=True).start()
         
