@@ -3,9 +3,6 @@ import socket
 from threading import Thread
 from config import network_config as cfg
 
-from gpiozero import LED
-light = LED(12)
-
 class Socket:
     def __init__(self, sock=None):
         if sock is None:
@@ -115,15 +112,5 @@ def createServer():
     # now do something with the clientsocket
     # Thread(target=client_thread, args=(clientsocket, address[0], address[1]), daemon=True).start()
     s = Socket(clientsocket)
-    while True:
-        try:
-            msg = s.receive()
-            if msg == "1":
-                light.on()
-            elif msg == "0":
-                light.off()
-            print(msg)
-        except:
-            print("Error. Closing connection...")
-            break
+    return s
         
