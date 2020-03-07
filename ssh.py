@@ -6,7 +6,7 @@ Qxf2 Services: Utility script to ssh into a remote server
 * Download a file
 """
 
-from config import ssh_config as conf_file
+from config import network_config as conf_file
 import socket
 import paramiko
 import os

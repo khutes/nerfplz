@@ -1,6 +1,7 @@
 import time
 import socket
 from threading import Thread
+from config import network_config as cfg
 
 from gpiozero import LED
 light = LED(12)
@@ -85,19 +86,19 @@ def createClient():
             break
 
 
-def client_thread(socket, ip, port):
-    s = Socket(socket)
-    while True:
-        try:
-            msg = s.receive()
-            if msg == "1":
-                light.on()
-            elif msg == "0":
-                light.off()
-            print(msg)
-        except:
-            print("Error. Closing connection...")
-            break
+# def client_thread(socket, ip, port):
+#     s = Socket(socket)
+#     while True:
+#         try:
+#             msg = s.receive()
+#             if msg == "1":
+#                 light.on()
+#             elif msg == "0":
+#                 light.off()
+#             print(msg)
+#         except:
+#             print("Error. Closing connection...")
+#             break
 
 
 def createServer():
@@ -109,10 +110,20 @@ def createServer():
     print(socket.gethostname())
     serversocket.listen(1)
 
+    # accept 1 connection from outside
+    (clientsocket, address) = serversocket.accept()
+    # now do something with the clientsocket
+    # Thread(target=client_thread, args=(clientsocket, address[0], address[1]), daemon=True).start()
+    s = Socket(clientsocket)
     while True:
-        # accept connections from outside
-        (clientsocket, address) = serversocket.accept()
-        # now do something with the clientsocket
-        # in this case, we'll pretend this is a threaded server
-        Thread(target=client_thread, args=(clientsocket, address[0], address[1]), daemon=True).start()
+        try:
+            msg = s.receive()
+            if msg == "1":
+                light.on()
+            elif msg == "0":
+                light.off()
+            print(msg)
+        except:
+            print("Error. Closing connection...")
+            break
         
