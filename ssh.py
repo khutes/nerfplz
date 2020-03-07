@@ -71,7 +71,7 @@ class Ssh_Util:
             if self.connect():
                 for command in commands:
                     print("Executing command --> {}".format(command))
-                    stdin, stdout, stderr = self.client.exec_command(command, timeout=self.timeout)
+                    stdin, stdout, stderr = self.client.exec_command(command, timeout=1)
                     self.ssh_output = stdout.read()
                     self.ssh_error = stderr.read()
                     if self.ssh_error:

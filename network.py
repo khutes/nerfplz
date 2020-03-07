@@ -69,9 +69,10 @@ def createClient():
     # print(socket.gethostbyname("raspberrypi"))
     # exit(0)
     # print("Pi Address: " + piAddress)
-    piAddress = "192.168.1.8"
+    piAddress = cfg.HOST
+    piPort = cfg.MESSAGE_PORT
 
-    mySocket.connect(piAddress, 8080)
+    mySocket.connect(piAddress, piPort)
 
     while True:
         try:

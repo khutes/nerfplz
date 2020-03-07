@@ -4,11 +4,11 @@ import ssh
 # network.createClient()
 ssh.execute()
 
-try:
-    network.createClient()
+# try:
+network.createClient()
 
-except:
-    print("Socket error")
+# except:
+#     print("Socket error")
 
-finally:
-    ssh.killServer()
+# finally:
+ssh.killServer()
