@@ -2,6 +2,9 @@ import time
 import socket
 from threading import Thread
 
+from gpiozero import LED
+light = LED(12)
+
 class Socket:
     def __init__(self, sock=None):
         if sock is None:
@@ -84,6 +87,10 @@ def client_thread(socket, ip, port):
     while True:
         try:
             msg = s.receive()
+            if msg == "1":
+                light.on()
+            elif msg == "0":
+                light.off()
             print(msg)
         except:
             print("Error. Closing connection...")
