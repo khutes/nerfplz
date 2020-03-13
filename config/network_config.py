@@ -1,9 +1,13 @@
+import socket
+
 """
 This config file would have the credentials of remote server, 
 the commands to execute, upload and download file path details.
 """
+
 #Server credential details needed for ssh 
-HOST='192.168.1.8'
+HOST = ''
+HOSTNAME = 'nerfpi'
 USERNAME='pi'
 PASSWORD='pi'
 PORT = 22
@@ -14,4 +18,10 @@ TIMEOUT = 10
 # PKEY = 'Enter your key filename here'
 
 #Sample commands to execute(Add your commands here)
-COMMANDS = ['killall -9 python3', 'python3 ~/Desktop/nerfplz/rpi.py']
+COMMANDS = ['python3 ~/Desktop/nerfplz/rpi.py']
+
+def init():
+    global HOST
+    HOST = socket.getaddrinfo("nerfpi", None, family=socket.AF_INET6, proto=socket.IPPROTO_TCP)[0][4][0]
+    print("RPI Address: " + HOST)
+    return 0

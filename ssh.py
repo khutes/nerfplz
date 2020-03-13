@@ -1,10 +1,4 @@
-"""
-Qxf2 Services: Utility script to ssh into a remote server
-* Connect to the remote server
-* Execute the given command
-* Upload a file
-* Download a file
-"""
+
 
 from config import network_config as conf_file
 import socket
@@ -12,8 +6,6 @@ import paramiko
 import os
 import sys
 import time
-# sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-
 
 class Ssh_Util:
     "Class to connect to remote server"
@@ -62,7 +54,7 @@ class Ssh_Util:
         return result_flag
 
     def execute_command(self, commands):
-        """Execute a command on the remote host.Return a tuple containing
+        """Execute a command on the remote host. Return a tuple containing
         an integer status and a two strings, the first containing stdout
         and the second containing stderr from the command."""
         self.ssh_output = None
@@ -71,11 +63,11 @@ class Ssh_Util:
             if self.connect():
                 for command in commands:
                     print("Executing command --> {}".format(command))
-                    stdin, stdout, stderr = self.client.exec_command(command, timeout=1)
+                    stdin, stdout, stderr = self.client.exec_command(command, timeout=5)
                     self.ssh_output = stdout.read()
                     self.ssh_error = stderr.read()
                     if self.ssh_error:
-                        print("Error: " + str(self.ssh_error))
+                        print("Error: " + str(self.ssh_error.decode()))
                         result_flag = False
                     # else:
                         # print("Output: ", command)
@@ -95,29 +87,22 @@ class Ssh_Util:
         return result_flag
 
 
-#---USAGE
+# Executes commands from network_config file
 def execute():
-    # print("Start of %s" % __file__)
 
     #Initialize the ssh object
     ssh_obj = Ssh_Util()
 
-    #Sample code to execute commands
+    #Execute commands
     if ssh_obj.execute_command(ssh_obj.commands) is True:
         return
-        # print("Commands executed successfully\n")
-    # else:
-        # print("Unable to execute the commands")
 
+# Shut down processes on raspberry pi to clear up ports
 def killServer():
-    # print("Start of %s" % __file__)
-
     #Initialize the ssh object
     ssh_obj = Ssh_Util()
 
-    #Sample code to execute commands
+    # Execute commands
     if ssh_obj.execute_command(["killall -9 python3"]) is True:
         return
-        # print("Commands executed successfully\n")
-    # else:
-        # print("Unable to execute the commands")
+
