@@ -7,8 +7,8 @@ ssh.execute()
 # try:
 network.createClient()
 
-# except:
-#     print("Socket error")
+# except Exception as e:
+#     print("Socket error: " + str(e))
 
 # finally:
 ssh.killServer()

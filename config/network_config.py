@@ -14,4 +14,4 @@ TIMEOUT = 10
 # PKEY = 'Enter your key filename here'
 
 #Sample commands to execute(Add your commands here)
-COMMANDS = ['python3 ~/Desktop/nerfplz/rpi.py']
+COMMANDS = ['killall -9 python3', 'python3 ~/Desktop/nerfplz/rpi.py']

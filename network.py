@@ -7,7 +7,7 @@ class Socket:
     def __init__(self, sock=None):
         if sock is None:
             self.sock = socket.socket(
-                socket.AF_INET, socket.SOCK_STREAM)
+                socket.AF_INET6, socket.SOCK_STREAM)
         else:
             self.sock = sock
 
@@ -57,7 +57,7 @@ class Socket:
 def createClient():
 
     # create an INET, STREAMing socket
-    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    s = socket.socket(socket.AF_INET6, socket.SOCK_STREAM)
 
     mySocket = Socket(s)
 
@@ -65,14 +65,16 @@ def createClient():
     # address = socket.gethostbyname(hostname)
     # print("Host Name: " + hostname + "\nAddress: " + address)
 
-    # piAddress = socket.gethostbyname("raspberrypi")
-    # print(socket.gethostbyname("raspberrypi"))
+    # piAddress = socket.gethostbyname("nerfpi")
+    piAddress6 = socket.getaddrinfo("nerfpi", None, family=socket.AF_INET6, proto=socket.IPPROTO_TCP) #[0][4][0]
+    # print(piAddress)
+    print(piAddress6)
     # exit(0)
     # print("Pi Address: " + piAddress)
-    piAddress = cfg.HOST
+    # piAddress = cfg.HOST
     piPort = cfg.MESSAGE_PORT
 
-    mySocket.connect(piAddress, piPort)
+    mySocket.connect(piAddress6, piPort)
 
     while True:
         try:
@@ -101,7 +103,7 @@ def createClient():
 
 def createServer():
     # create an INET, STREAMing socket
-    serversocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    serversocket = socket.socket(socket.AF_INET6, socket.SOCK_STREAM)
     # bind the socket to a public host, and a well-known port
     serversocket.bind(("0.0.0.0", 8080))
     # become a server socket
