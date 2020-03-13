@@ -25,8 +25,9 @@ except Exception as e:
     print("Error operating client: " + str(e))
     print("Shutting down system...")
 
-# finally:
-try:
-    ssh.killServer()
-except Exception as e:
-    print("Error killing server on RPI\nWARNING: Processes may still be running on RPI")
+# This option exists if we want to kill the server forcibly from the pc
+# Currently it should all be handled from the rpi 
+# try:
+#     ssh.killServer()
+# except Exception as e:
+#     print("Error killing server on RPI\nWARNING: Processes may still be running on RPI")
