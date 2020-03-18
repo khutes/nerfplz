@@ -1,4 +1,4 @@
-import network
+from network import network
 from gpiozero import LED
 from time import sleep
 

@@ -1,6 +1,6 @@
 from config import network_config as cfg
-import network
-import ssh
+from network import network
+from network import ssh
 import time
 
 while True:
