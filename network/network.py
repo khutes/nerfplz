@@ -7,7 +7,7 @@ class Socket:
     def __init__(self, sock=None):
         if sock is None:
             self.sock = socket.socket(
-                socket.AF_INET, socket.SOCK_STREAM)
+                socket.AF_INET6, socket.SOCK_STREAM)
         else:
             self.sock = sock
 
@@ -57,7 +57,7 @@ class Socket:
 def createClient():
 
     # create an INET, STREAMing socket
-    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    s = socket.socket(socket.AF_INET6, socket.SOCK_STREAM)
 
     mySocket = Socket(s)
 
@@ -81,7 +81,7 @@ def createClient():
 
 def createServer():
     # create an INET, STREAMing socket
-    serversocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    serversocket = socket.socket(socket.AF_INET6, socket.SOCK_STREAM)
     # bind the socket to a public host, and a well-known port
     serversocket.bind(("::", 8080))
     # become a server socket

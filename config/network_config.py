@@ -29,4 +29,5 @@ def init():
 def test():
     global HOST
     HOST = "fe80::37ed:7061:ac73:1b95"
-    print(socket.getaddrinfo("nerfpi", None, family=socket.AF_INET, proto=socket.IPPROTO_TCP))
+    # HOST = "10.183.166.148"
+    # print(socket.getaddrinfo("nerfpi", None, family=socket.AF_INET, proto=socket.IPPROTO_TCP))
