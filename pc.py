@@ -3,13 +3,15 @@ from network import network
 from network import ssh
 import time
 
-while True:
-    try:
-        cfg.init()
-        break
-    except Exception as e:
-        print("Error obtaining raspberry pi address. Retrying in 5 seconds...")
-        time.sleep(5)
+cfg.test()
+
+# while True:
+#     try:
+#         cfg.init()
+#         break
+#     except Exception as e:
+#         print("Error obtaining raspberry pi address. Retrying in 5 seconds...")
+#         time.sleep(5)
 
 while True:
     try:
