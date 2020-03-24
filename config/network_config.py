@@ -22,12 +22,6 @@ COMMANDS = ['python3 ~/Desktop/nerfplz/rpi.py']
 
 def init():
     global HOST
-    HOST = socket.getaddrinfo("nerfpi", None, family=socket.AF_INET6, proto=socket.IPPROTO_TCP)[0][4][0]
+    HOST = socket.getaddrinfo(HOSTNAME, None, family=socket.AF_INET6, proto=socket.IPPROTO_TCP)[0][4][0]
     print("RPI Address: " + HOST)
     return 0
-
-def test():
-    global HOST
-    HOST = "fe80::37ed:7061:ac73:1b95"
-    # HOST = "10.183.166.148"
-    # print(socket.getaddrinfo("nerfpi", None, family=socket.AF_INET, proto=socket.IPPROTO_TCP))
