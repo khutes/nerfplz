@@ -63,22 +63,21 @@ class Ssh_Util:
             if self.connect():
                 for command in commands:
                     print("Executing command --> {}".format(command))
-                    stdin, stdout, stderr = self.client.exec_command(command, timeout=5)
+                    stdin, stdout, stderr = self.client.exec_command(command, timeout=1)
                     self.ssh_output = stdout.read()
                     self.ssh_error = stderr.read()
                     if self.ssh_error:
                         print("Error: " + str(self.ssh_error.decode()))
                         result_flag = False
-                    # else:
-                        # print("Output: ", command)
+                    else:
+                        print("Server Running...")
                 self.client.close()
             else:
                 print("Could not establish SSH connection")
                 result_flag = False
         except socket.timeout:
-            # print("Command timed out.", command)
+            print("Server running...")
             self.client.close()
-            result_flag = False
         except paramiko.SSHException:
             print("Failed to execute the command!", command)
             self.client.close()
@@ -94,15 +93,15 @@ def execute():
     ssh_obj = Ssh_Util()
 
     #Execute commands
-    if ssh_obj.execute_command(ssh_obj.commands) is True:
-        return
-
+    if ssh_obj.execute_command(ssh_obj.commands) is False:
+        raise Exception()
+    
 # Shut down processes on raspberry pi to clear up ports
 def killServer():
     #Initialize the ssh object
     ssh_obj = Ssh_Util()
 
     # Execute commands
-    if ssh_obj.execute_command(["killall -9 python3"]) is True:
-        return
+    if ssh_obj.execute_command(["killall -9 python3"]) is False:
+        raise Exception()
 
