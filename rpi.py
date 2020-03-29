@@ -13,6 +13,7 @@ c = network.createCameraServer()
 
 t = threading.Thread(target=camServ.startCameraFeed, args=(c,))
 threads.append(t)
+t.start()
 
 while True:
     try:

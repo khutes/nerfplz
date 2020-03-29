@@ -25,6 +25,7 @@ while True:
 try:
     t = threading.Thread(target=network.createCameraClient)
     threads.append(t)
+    t.start()
     network.createMessageClient()
 except Exception as e:
     print("Error operating client: " + str(e))
