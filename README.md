@@ -12,6 +12,9 @@ Project for CSCE462 Spring 20
 # To start system from pc
 $ python pc.py
 
+# To use camera
+pip install pillow
+pip install matplotlib
 
 
 
