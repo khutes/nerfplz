@@ -12,6 +12,7 @@ USERNAME='pi'
 PASSWORD='pi'
 PORT = 22
 MESSAGE_PORT = 8080
+CAMERA_PORT = 8000
 TIMEOUT = 10
 
 #.pem file details

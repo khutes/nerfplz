@@ -2,6 +2,9 @@ from config import network_config as cfg
 from network import network
 from network import ssh
 import time
+import threading
+
+threads = []
 
 while True:
     try:
@@ -20,11 +23,16 @@ while True:
         time.sleep(5)
 
 try:
-    network.createClient()
+    t = threading.Thread(target=network.createCameraClient)
+    threads.append(t)
+    network.createMessageClient()
 except Exception as e:
     print("Error operating client: " + str(e))
     print("Shutting down system...")
 
+for t in threads:
+    t.join()
+    
 # This option exists if we want to kill the server forcibly from the pc
 # Currently it should all be handled from the rpi 
 # try:

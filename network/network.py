@@ -54,7 +54,7 @@ class Socket:
         return ''.join(chunks)
 
 
-def createClient():
+def __createClient(port):
 
     # create an INET, STREAMing socket
     s = socket.socket(socket.AF_INET6, socket.SOCK_STREAM)
@@ -62,28 +62,38 @@ def createClient():
     mySocket = Socket(s)
 
     piAddress = cfg.HOST
-    piPort = cfg.MESSAGE_PORT
+    piPort = port
 
     mySocket.connect(piAddress, piPort)
 
-    while True:
-        try:
-            msg = input("Enter Message: ")
-            if msg == "quit":
-                print("Closing client...")
-                del mySocket
+    if (port == cfg.MESSAGE_PORT):
+        while True:
+            try:
+                msg = input("Enter Message: ")
+                if msg == "quit":
+                    print("Closing client...")
+                    del mySocket
+                    break
+                mySocket.send(msg)
+                print("message sent\n")
+            except:
+                print("Send error. Closing connection...")
                 break
-            mySocket.send(msg)
-            print("message sent\n")
-        except:
-            print("Send error. Closing connection...")
-            break
+        return
+    else:
+        return mySocket
 
-def createServer():
+def createMessageClient():
+    return __createClient(cfg.MESSAGE_PORT)
+
+def createCameraClient():
+    return __createClient(cfg.CAMERA_PORT)
+
+def __createServer(port):
     # create an INET, STREAMing socket
     serversocket = socket.socket(socket.AF_INET6, socket.SOCK_STREAM)
     # bind the socket to a public host, and a well-known port
-    serversocket.bind(("::", 8080))
+    serversocket.bind(("::", port))
     # become a server socket
     print(socket.gethostname())
     serversocket.listen(1)
@@ -94,4 +104,10 @@ def createServer():
     # Thread(target=client_thread, args=(clientsocket, address[0], address[1]), daemon=True).start()
     s = Socket(clientsocket)
     return s
+
+def createMessageServer():
+    return __createServer(cfg.MESSAGE_PORT)
+
+def createCameraServer():
+    return __createServer(cfg.CAMERA_PORT)
         

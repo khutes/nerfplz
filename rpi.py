@@ -1,10 +1,18 @@
 from network import network
 from gpiozero import LED
 from time import sleep
+from nerfCamera import server as camServ
+import threading
+
+threads = []
 
 light = LED(12)
 
-s = network.createServer()
+s = network.createMessageServer()
+c = network.createCameraServer()
+
+t = threading.Thread(target=camServ.startCameraFeed, args=(c,))
+threads.append(t)
 
 while True:
     try:
@@ -23,3 +31,6 @@ while True:
             sleep(.25)
         del s
         break
+
+for t in threads:
+    t.join()
