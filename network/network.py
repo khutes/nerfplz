@@ -73,10 +73,12 @@ def __createClient(port):
                 if msg == "quit":
                     print("Closing client...")
                     del mySocket
+                    cfg.ALIVE = False
                     break
                 mySocket.send(msg)
                 print("message sent\n")
             except:
+                cfg.ALIVE = False
                 print("Send error. Closing connection...")
                 break
         return

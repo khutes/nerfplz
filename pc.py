@@ -24,19 +24,20 @@ while True:
         time.sleep(5)
 
 try:
+    print("Connecting messaging client...")
+    t = threading.Thread(target = network.createMessageClient)
+    threads.append(t)
+    t.start()
+
     print("Connecting to Pi Camera...")
     camSock = network.createCameraClient()
     print("Connected.  Starting feed...")
-    t = threading.Thread(target=camClient.viewCameraFeed, args=(camSock,))
-    threads.append(t)
-    t.start()
-    print("Connecting messaging client...")
-    network.createMessageClient()
+    camClient.viewCameraFeed(camSock)
+
 except Exception as e:
     print("Error operating client: " + str(e))
     print("Shutting down system...")
 
-cfg.ALIVE = False
 print("Collecting threads...")
 for t in threads:
     t.join()
