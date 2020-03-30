@@ -36,8 +36,6 @@ try:
     print("Connecting messaging client")
     network.createMessageClient()
 
-    webbrowser.close()
-
     # print("Connecting to Pi Camera...")
     # camSock = network.createCameraClient()
     # print("Connected.  Starting feed...")
