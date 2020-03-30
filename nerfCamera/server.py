@@ -13,8 +13,8 @@ def startCameraFeed(cameraSocket):
         # camera.vflip = True
         camera.resolution = (480, 360)
         # Start a preview and let the camera warm up for 2 seconds
-        camera.start_preview()
-        time.sleep(2)
+        # camera.start_preview()
+        # time.sleep(2)
 
         # Note the start time and construct a stream to hold image data
         # temporarily (we could write it directly to connection but in this

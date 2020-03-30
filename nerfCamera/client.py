@@ -3,6 +3,7 @@ import socket
 import struct
 from PIL import Image
 import matplotlib.pyplot as pl
+from config import network_config as cfg
 
 def viewCameraFeed(cameraSocket):
     # Accept a single connection and make a file-like object out of it
@@ -10,7 +11,7 @@ def viewCameraFeed(cameraSocket):
     connection = cameraSocket.sock.makefile('rb')
     try:
         img = None
-        while True:
+        while cfg.ALIVE:
             # Read the length of the image as a 32-bit unsigned int. If the
             # length is zero, quit the loop
             image_len = struct.unpack('<L', connection.read(struct.calcsize('<L')))[0]
@@ -33,9 +34,9 @@ def viewCameraFeed(cameraSocket):
             pl.pause(0.01)
             pl.draw()
 
-            print('Image is %dx%d' % image.size)
+            # print('Image is %dx%d' % image.size)
             image.verify()
-            print('Image is verified')
+            # print('Image is verified')
     finally:
         connection.close()
 

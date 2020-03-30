@@ -36,6 +36,7 @@ except Exception as e:
     print("Error operating client: " + str(e))
     print("Shutting down system...")
 
+cfg.ALIVE = False
 print("Collecting threads...")
 for t in threads:
     t.join()

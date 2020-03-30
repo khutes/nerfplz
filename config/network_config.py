@@ -14,6 +14,7 @@ PORT = 22
 MESSAGE_PORT = 8080
 CAMERA_PORT = 8000
 TIMEOUT = 10
+ALIVE = True
 
 #.pem file details
 # PKEY = 'Enter your key filename here'
