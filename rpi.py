@@ -8,10 +8,11 @@ threads = []
 
 light = LED(12)
 
-s = network.createMessageServer()
-c = network.createCameraServer()
+# Creating the camera server is currently a blocking function until a connection is established
+camSock = network.createCameraServer()
+msgSock = network.createMessageServer()
 
-t = threading.Thread(target=camServ.startCameraFeed, args=(c,))
+t = threading.Thread(target=camServ.startCameraFeed, args=(camSock,))
 threads.append(t)
 t.start()
 
