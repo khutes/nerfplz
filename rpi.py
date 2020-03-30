@@ -1,7 +1,7 @@
 from network import network
 from gpiozero import LED
 from time import sleep
-from nerfCamera import server as camServ
+from nerfCamera import httpServer as camServ
 import threading
 
 threads = []
@@ -18,10 +18,10 @@ def blinkLED(numTimes):
     return
 
 # Creating the camera server is currently a blocking function until a connection is established
-camSock = network.createCameraServer()
+# camSock = network.createCameraServer()
 msgSock = network.createMessageServer()
 
-t = threading.Thread(target=camServ.startCameraFeed, args=(camSock,))
+t = threading.Thread(target=camServ.startCameraFeed)
 threads.append(t)
 t.start()
 
@@ -35,8 +35,8 @@ while True:
         print(msg)
     except:
         print("Error. Closing connection...")
-        blink(4)
-        del s
+        blinkLED(4)
+        del msgSock
         break
 
 for t in threads:

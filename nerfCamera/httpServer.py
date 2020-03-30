@@ -7,8 +7,10 @@ import picamera
 import logging
 import socketserver
 import socket
-from threading import Condition
+import threading
+from time import sleep
 from http import server
+from config import network_config as cfg
 
 PAGE = """\
 <html>
@@ -17,7 +19,7 @@ PAGE = """\
 </head>
 <body>
 <center><h1>Raspberry Pi - Surveillance Camera</h1></center>
-<center><img src="stream.mjpg" width="720" height="480"></center>
+<center><img src="stream.mjpg" width="1080" height="720"></center>
 </body>
 </html>
 """
@@ -26,7 +28,7 @@ class StreamingOutput(object):
     def __init__(self):
         self.frame = None
         self.buffer = io.BytesIO()
-        self.condition = Condition()
+        self.condition = threading.Condition()
 
     def write(self, buf):
         if buf.startswith(b'\xff\xd8'):
@@ -88,15 +90,29 @@ class StreamingServer(socketserver.ThreadingMixIn, server.HTTPServer):
 class HTTPServerV6(StreamingServer):
     address_family = socket.AF_INET6
 
+def __shutDownThread(server):
+    while cfg.ALIVE:
+        sleep(3)
+    server.shutdown()
+    return
 
-with picamera.PiCamera(resolution='480x360', framerate=10) as camera:
-    output = StreamingOutput()
-    #Uncomment the next line to change your Pi's Camera rotation (in degrees)
-    #camera.rotation = 90
-    camera.start_recording(output, format='mjpeg')
-    try:
-        address = ('::', 8000)
-        server = HTTPServerV6(address, StreamingHandler)
-        server.serve_forever()
-    finally:
-        camera.stop_recording()
+
+def startCameraFeed():
+    threads = []
+    with picamera.PiCamera(resolution='480x360', framerate=10) as camera:
+        output = StreamingOutput()
+        #Uncomment the next line to change your Pi's Camera rotation (in degrees)
+        #camera.rotation = 90
+        camera.start_recording(output, format='mjpeg')
+        try:
+            address = ('::', 8000)
+            server = HTTPServerV6(address, StreamingHandler)
+            t = threading.Thread(target=__shutDownThread, args=(server,))
+            threads.append(t)
+            t.start()
+            server.serve_forever()
+        finally:
+            camera.stop_recording()
+            for t in threads:
+                t.join()
+    return

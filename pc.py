@@ -1,7 +1,7 @@
 from config import network_config as cfg
-from nerfCamera import client as camClient
 from network import network
 from network import ssh
+import webbrowser
 import time
 import threading
 
@@ -24,15 +24,24 @@ while True:
         time.sleep(5)
 
 try:
-    print("Connecting messaging client...")
-    t = threading.Thread(target = network.createMessageClient)
-    threads.append(t)
-    t.start()
+    # print("Connecting messaging client...")
+    # t = threading.Thread(target = network.createMessageClient)
+    # threads.append(t)
+    # t.start()
 
-    print("Connecting to Pi Camera...")
-    camSock = network.createCameraClient()
-    print("Connected.  Starting feed...")
-    camClient.viewCameraFeed(camSock)
+    print("Opening camera feed...")
+    camURL = "http://[" + str(cfg.HOST) + "]:" + str(cfg.CAMERA_PORT)
+    webbrowser.open(camURL)
+
+    print("Connecting messaging client")
+    network.createMessageClient()
+
+    webbrowser.close()
+
+    # print("Connecting to Pi Camera...")
+    # camSock = network.createCameraClient()
+    # print("Connected.  Starting feed...")
+    # camClient.viewCameraFeed(camSock)
 
 except Exception as e:
     print("Error operating client: " + str(e))
