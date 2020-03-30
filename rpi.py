@@ -2,6 +2,7 @@ from network import network
 from gpiozero import LED
 from time import sleep
 from nerfCamera import httpServer as camServ
+from config import network_config as cfg
 import threading
 
 threads = []
@@ -34,6 +35,7 @@ while True:
             light.off()
         print(msg)
     except:
+        cfg.ALIVE = False
         print("Error. Closing connection...")
         blinkLED(4)
         del msgSock
