@@ -14,22 +14,20 @@ def blinkLED(numTimes):
         sleep(.25)
         light.off()
         sleep(.25)
+    sleep(1)
     return
 
 # Creating the camera server is currently a blocking function until a connection is established
 camSock = network.createCameraServer()
-blinkLED(1)
 msgSock = network.createMessageServer()
-blinkLED(2)
 
 t = threading.Thread(target=camServ.startCameraFeed, args=(camSock,))
 threads.append(t)
 t.start()
-blinkLED(3)
 
 while True:
     try:
-        msg = s.receive()
+        msg = msgSock.receive()
         if msg == "1":
             light.on()
         elif msg == "0":
@@ -37,11 +35,7 @@ while True:
         print(msg)
     except:
         print("Error. Closing connection...")
-        for i in range(4):
-            light.on()
-            sleep(.25)
-            light.off()
-            sleep(.25)
+        blink(4)
         del s
         break
 
