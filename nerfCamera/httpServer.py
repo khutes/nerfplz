@@ -19,7 +19,7 @@ PAGE = """\
 </head>
 <body>
 <center><h1>Raspberry Pi - Surveillance Camera</h1></center>
-<center><img src="stream.mjpg" width="1080" height="720"></center>
+<center><img src="stream.mjpg" width="720" height="480"></center>
 </body>
 </html>
 """
@@ -96,10 +96,11 @@ def __shutDownThread(server):
     server.shutdown()
     return
 
-
+output = ''
 def startCameraFeed():
     threads = []
     with picamera.PiCamera(resolution='480x360', framerate=10) as camera:
+        global output
         output = StreamingOutput()
         #Uncomment the next line to change your Pi's Camera rotation (in degrees)
         #camera.rotation = 90
