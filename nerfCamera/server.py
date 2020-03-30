@@ -7,7 +7,7 @@ import picamera
 def startCameraFeed(cameraSocket):
 # Make a file-like object out of the connection
     # connection = cameraSocket.makefile('wb')
-    connection = cameraSocket.accept()[0].makefile('wb')
+    connection = cameraSocket.sock.makefile('wb')
     try:
         camera = picamera.PiCamera()
         camera.vflip = True

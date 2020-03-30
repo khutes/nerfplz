@@ -7,7 +7,7 @@ import matplotlib.pyplot as pl
 def viewCameraFeed(cameraSocket):
     # Accept a single connection and make a file-like object out of it
     # connection = cameraSocket.accept()[0].makefile('rb')
-    connection = cameraSocket.makefile('rb')
+    connection = cameraSocket.sock.makefile('rb')
     try:
         img = None
         while True:
