@@ -7,6 +7,7 @@ import threading
 
 threads = []
 
+# Find the pi on the network
 while True:
     try:
         cfg.init()
@@ -15,6 +16,7 @@ while True:
         print("Error obtaining raspberry pi address. Retrying in 5 seconds...")
         time.sleep(5)
 
+# Starting scripts on the pi
 while True:
     try:
         ssh.execute()
@@ -29,13 +31,19 @@ try:
     # threads.append(t)
     # t.start()
 
+    # Creating the camera feed
     print("Opening camera feed...")
     time.sleep(1)
     camURL = "http://[" + str(cfg.HOST) + "]:" + str(cfg.CAMERA_PORT)
     webbrowser.open(camURL)
 
     print("Connecting messaging client")
-    network.createMessageClient()
+    socket = network.createMessageClient()
+    socket.send("a;lsdkfja;lsdkjf")
+    # print("Connecting messaging client...")
+    # t = threading.Thread(target = xbox.main(), args=(socket, 1)))
+    # threads.append(t)
+    # t.start()
 
     # print("Connecting to Pi Camera...")
     # camSock = network.createCameraClient()

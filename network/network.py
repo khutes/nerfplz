@@ -66,24 +66,25 @@ def __createClient(port):
 
     mySocket.connect(piAddress, piPort)
 
-    if (port == cfg.MESSAGE_PORT):
-        while True:
-            try:
-                msg = input("Enter Message: ")
-                if msg == "quit":
-                    print("Closing client...")
-                    del mySocket
-                    cfg.ALIVE = False
-                    break
-                mySocket.send(msg)
-                print("message sent\n")
-            except:
-                cfg.ALIVE = False
-                print("Send error. Closing connection...")
-                break
-        return
-    else:
-        return mySocket
+    # if (port == cfg.MESSAGE_PORT):
+    #     while True:
+    #         try:
+    #             msg = input("Enter Message: ")
+    #             if msg == "quit":
+    #                 print("Closing client...")
+    #                 del mySocket
+    #                 cfg.ALIVE = False
+    #                 break
+    #             mySocket.send(msg)
+    #             print("message sent\n")
+    #         except:
+    #             cfg.ALIVE = False
+    #             print("Send error. Closing connection...")
+    #             break
+    #     return
+    # else:
+
+    return mySocket
 
 def createMessageClient():
     return __createClient(cfg.MESSAGE_PORT)
