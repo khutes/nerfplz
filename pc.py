@@ -1,6 +1,7 @@
 from config import network_config as cfg
 from network import network
 from network import ssh
+from xbox import xbox
 import webbrowser
 import time
 import threading
@@ -39,8 +40,9 @@ try:
 
     print("Connecting messaging client..")
     socket = network.createMessageClient()
+
     print("Connecting xbox...")
-    t = threading.Thread(target = xbox.run(), args=(socket,)))
+    t = threading.Thread(target = xbox.run, args=(socket,))
     threads.append(t)
     t.start()
 

@@ -2,7 +2,7 @@
 #Next step, each input will call a specific function that controls the motors. 
 #Integrate this with networking and camera 
 import pygame
-import controller
+from xbox import controller
 import time
 
 def run(socket):
@@ -17,10 +17,10 @@ def run(socket):
 	screen = pygame.display.set_mode((100,100))
 
 	# make a controller
-	cont = controller.Controller()
+	#cont = controller.Controller()
 
 	# Game Loop
-	done = False
+	done = True
 	test = input("Enter anything: ")
 	socket.send(test)
 

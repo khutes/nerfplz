@@ -29,9 +29,9 @@ t.start()
 while True:
     try:
         msg = msgSock.receive()
-        if msg == "1":
+        if msg == "A Button Down":
             light.on()
-        elif msg == "0":
+        else:
             light.off()
         print(msg)
     except:
