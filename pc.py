@@ -37,13 +37,12 @@ try:
     camURL = "http://[" + str(cfg.HOST) + "]:" + str(cfg.CAMERA_PORT)
     webbrowser.open(camURL)
 
-    print("Connecting messaging client")
+    print("Connecting messaging client..")
     socket = network.createMessageClient()
-    socket.send("a;lsdkfja;lsdkjf")
-    # print("Connecting messaging client...")
-    # t = threading.Thread(target = xbox.main(), args=(socket, 1)))
-    # threads.append(t)
-    # t.start()
+    print("Connecting xbox...")
+    t = threading.Thread(target = xbox.run(), args=(socket,)))
+    threads.append(t)
+    t.start()
 
     # print("Connecting to Pi Camera...")
     # camSock = network.createCameraClient()
