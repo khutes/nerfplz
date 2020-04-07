@@ -2,6 +2,7 @@ from config import network_config as cfg
 from network import network
 from network import ssh
 from xbox import xbox
+from keyboard import keyboard
 import webbrowser
 import time
 import threading
@@ -45,6 +46,11 @@ try:
     t = threading.Thread(target = xbox.run, args=(socket,))
     threads.append(t)
     t.start()
+	
+    print("Connecting keyboard...")
+    t = threading.Thread(target = keyboard.run, args=(socket,))
+    threads.append(t)
+    t.start()	
 
     # print("Connecting to Pi Camera...")
     # camSock = network.createCameraClient()

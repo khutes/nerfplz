@@ -2,10 +2,11 @@
 #Next step, each input will call a specific function that controls the motors. 
 #Integrate this with networking and camera 
 import pygame
-from xbox import controller
 import time
+import controller
+import messages_config as send_to_pi
 
-def run(socket):
+def run():
 	pygame.init()
 
 	REFRESH_RATE = 20
@@ -17,97 +18,57 @@ def run(socket):
 	screen = pygame.display.set_mode((100,100))
 
 	# make a controller
-	#cont = controller.Controller()
+	cont = controller.Controller()
 
 	# Game Loop
-	done = True
+	done = False
+	# for testing purposes
 	test = input("Enter anything: ")
-	socket.send(test)
+	#socket.send(test)
 
 	while done==False:
 	# event handling
 		for event in pygame.event.get():
 			if event.type == pygame.QUIT:
+				send_to_pi.messages(0,0)
 				done=True
 			# handle events for specific buttons
 			if event.type == pygame.JOYBUTTONDOWN: #add button up
-				if event.button == controller.A:
-					print("A Button Down")
-					socket.send("A Button Down")					
-				if event.button == controller.B:
-					print("B Button Down")
-				if event.button == controller.X:
-					print("X Button Down")
-				if event.button == controller.Y:
-					print("Y Button Down")
-				if event.button == controller.LEFT_BUMP:
-					print("Left Bump Button Down")
-				if event.button == controller.RIGHT_BUMP:
-					print("Right Bump Button Down")		
-				if event.button == controller.BACK:
-					print("Quiting...")				
+				if event.button == controller.RIGHT_BUMP: #Fire
+					send_to_pi.messages(9,0)		
+				if event.button == controller.BACK: #Quit
+					send_to_pi.messages(0,0)				
 					done=True					
-			# handle events for specific buttons
-			if event.type == pygame.JOYBUTTONUP: #add button up
-				if event.button == controller.A:
-					print("A Button Up")
-				if event.button == controller.B:
-					print("B Button Up")
-				if event.button == controller.X:
-					print("X Button Up")
-				if event.button == controller.Y:
-					print("Y Button Up")
-				if event.button == controller.LEFT_BUMP:
-					print("Left Bump Button Up")
-				if event.button == controller.RIGHT_BUMP:
-					print("Right Bump Button Up")			
+
+		trigger = cont.get_triggers()
+		if trigger > 0.2 : #Right Trigger
+			send_to_pi.messages(1,trigger)
+			time.sleep(0.1)
+		if trigger < -0.3 : #Left Trigger
+			send_to_pi.messages(3,trigger)
+			time.sleep(0.1)
+			
 		# handle joysticks
 		left_x, left_y = cont.get_left_stick()
-		if left_x > 0.5 :
-			print("Turn Right")
+		if left_x > 0.1 : #Turn Right
+			send_to_pi.messages(4,left_x)
 			time.sleep(0.1)
-		if left_x < -0.5 :
-			print("Turn Left")
-			time.sleep(0.1)
-		if left_y > 0.5 :
-			print("Backward")
-			time.sleep(0.1)
-		if left_y < -0.5 :
-			print("Forward")
+		if left_x < -0.1 : #Turn Left
+			send_to_pi.messages(2,left_x)
 			time.sleep(0.1)
 
 		right_x, right_y = cont.get_right_stick()
-		if right_x > 0.5 :
-			print("Steer Right")
+		if right_x > 0.1 : #Camera Right
+			send_to_pi.messages(8,right_x)
 			time.sleep(0.1)
-		if right_x < -0.5 :
-			print("Steer Left")
+		if right_x < -0.1 : #Camera Left
+			send_to_pi.messages(6,right_x)
 			time.sleep(0.1)
-		if right_y > 0.5 :
-			print("Steer Down")
+		if right_y > 0.1 : #Camera Down
+			send_to_pi.messages(7,right_y)
 			time.sleep(0.1)
-		if right_y < -0.5 :
-			print("Steer Up")
-			time.sleep(0.1)
-
-		trigger = cont.get_triggers()
-		if trigger > 0.3 :
-			print("Right Trigger")
-			time.sleep(0.1)
-		if trigger < -0.3 :
-			print("Left Trigger")
+		if right_y < -0.1 : #Camera Up
+			send_to_pi.messages(5,right_y)
 			time.sleep(0.1)
 
-		dpad = cont.get_pad() # up, right, down, left
-		if dpad[0] == 1 :
-			print("D-PAD UP")
-			time.sleep(0.1)
-		if dpad[1] == 1 :
-			print("D-PAD RIGHT")
-			time.sleep(0.1)
-		if dpad[2] == 1 :
-			print("D-PAD DOWN")
-			time.sleep(0.1)
-		if dpad[3] == 1 :
-			print("D-PAD LEFT")
-			time.sleep(0.1)
+run()
