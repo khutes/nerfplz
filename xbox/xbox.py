@@ -3,16 +3,16 @@
 #Integrate this with networking and camera 
 import pygame
 import time
-import controller
+from xbox import controller
 from config import messages_config as send_to_pi
 
-def run():
+def run(cont):
 	pygame.init()
 
-	REFRESH_RATE = 20
+	# REFRESH_RATE = 20
 
-	# Used to manage how fast the screen updates
-	clock = pygame.time.Clock()
+	# # Used to manage how fast the screen updates
+	# clock = pygame.time.Clock()
 
 	#Creates a pygame screen, only required to pick up input from the xbox controller
 	screen = pygame.display.set_mode((100,100))
@@ -23,8 +23,8 @@ def run():
 	# Game Loop
 	done = True
 	# for testing purposes
-	test = input("Enter anything: ")
-	send_to_pi.messages(0, 0)
+	# test = input("Enter anything: ")
+	# send_to_pi.messages(9, 0)
 
 	while done==False:
 	# event handling

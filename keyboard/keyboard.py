@@ -9,7 +9,7 @@ def run():
 	pygame.init()
 
 	done = False
-	#Creates a pygame screen, only required to pick up input from the xbox controller
+	# Creates a pygame screen, only required to pick up input from the xbox controller
 	screen = pygame.display.set_mode((100,100))
 
 	try:	
@@ -17,7 +17,7 @@ def run():
 		# event handling
 			keys = pygame.key.get_pressed()
 			if keys[pygame.K_w]:
-				send_to_pi.messages(socket,1,0.5)
+				send_to_pi.messages(1, 0.5)
 				time.sleep(0.1)				
 			if keys[pygame.K_a]:
 				send_to_pi.messages(2, 1.0)

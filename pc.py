@@ -3,7 +3,9 @@ from config import messages_config as msgcfg
 from network import network
 from network import ssh
 from xbox import xbox
+from xbox import controller as xboxCont
 from keyboard import keyboard
+import pygame
 import webbrowser
 import time
 import threading
@@ -34,25 +36,28 @@ try:
     # threads.append(t)
     # t.start()
 
-    # Creating the camera feed
-    print("Opening camera feed...")
-    time.sleep(1)
-    camURL = "http://[" + str(cfg.HOST) + "]:" + str(cfg.CAMERA_PORT)
-    webbrowser.open(camURL)
+    # # Creating the camera feed
+    # print("Opening camera feed...")
+    # time.sleep(1)
+    # camURL = "http://[" + str(cfg.HOST) + "]:" + str(cfg.CAMERA_PORT)
+    # webbrowser.open(camURL)
 
     print("Connecting messaging client..")
     socket = network.createMessageClient()
     msgcfg.setSocket(socket)
 
-    print("Connecting xbox...")
-    t = threading.Thread(target = xbox.run, args=(socket,))
-    threads.append(t)
-    t.start()
-	
-    print("Connecting keyboard...")
-    t = threading.Thread(target = keyboard.run, args=(socket,))
-    threads.append(t)
-    t.start()	
+    try:
+        cont = xboxCont.Controller()
+        print("Connecting xbox...")
+        t = threading.Thread(target=xbox.run, args=(cont,))
+        threads.append(t)
+        t.start()
+    except Exception as e:
+        print("No xbox controller detected\nUsing keyboard controls...")
+        print("Connecting keyboard...")
+        t = threading.Thread(target = keyboard.run)
+        threads.append(t)
+        t.start()
 
     # print("Connecting to Pi Camera...")
     # camSock = network.createCameraClient()

@@ -1,8 +1,9 @@
 
 __sock = None
 
-def set__sock(__sock):
-	__sock = __sock
+def setSocket(socket):
+	global __sock
+	__sock = socket
 
 def messages(input, value):
 	if input == 0: #Quit
