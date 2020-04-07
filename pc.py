@@ -1,4 +1,5 @@
 from config import network_config as cfg
+from config import messages_config as msgcfg
 from network import network
 from network import ssh
 from xbox import xbox
@@ -41,6 +42,7 @@ try:
 
     print("Connecting messaging client..")
     socket = network.createMessageClient()
+    msgcfg.setSocket(socket)
 
     print("Connecting xbox...")
     t = threading.Thread(target = xbox.run, args=(socket,))

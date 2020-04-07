@@ -4,7 +4,7 @@
 import pygame
 import time
 import controller
-import messages_config as send_to_pi
+from config import messages_config as send_to_pi
 
 def run():
 	pygame.init()
@@ -18,13 +18,13 @@ def run():
 	screen = pygame.display.set_mode((100,100))
 
 	# make a controller
-	cont = controller.Controller()
+	# cont = controller.Controller()
 
 	# Game Loop
-	done = False
+	done = True
 	# for testing purposes
 	test = input("Enter anything: ")
-	#socket.send(test)
+	send_to_pi.messages(0, 0)
 
 	while done==False:
 	# event handling
@@ -70,5 +70,3 @@ def run():
 		if right_y < -0.1 : #Camera Up
 			send_to_pi.messages(5,right_y)
 			time.sleep(0.1)
-
-run()
