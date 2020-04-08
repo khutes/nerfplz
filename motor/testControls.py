@@ -24,7 +24,7 @@ def run(car):
             if keys[pygame.K_m]:
                 selM.stop()
                 car.printMotors()
-                selM = input("Select a new motor: ")
+                selM = car.motors[input("Select a new motor: ")]
                 time.sleep(0.1)
             if keys[pygame.K_UP]:
                 selM.setSpeed(selM.speed + 5)
