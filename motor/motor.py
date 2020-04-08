@@ -1,5 +1,6 @@
 import RPi.GPIO as GPIO
 import motor_config as mcfg
+import time
 
 GPIO.setmode(GPIO.BCM)
 
@@ -10,9 +11,10 @@ class DC:
         self.in2 = GPIOin2
         self.en = GPIOen
         self.speed = speed
+        self.increment = mcfg.DC_SPEED_INC
         
-        self.maxSpeed = mcfg.DEFAULT_MAX_SPEED
-        self.minSpeed = mcfg.DEFAULT_MIN_SPEED
+        self.maxSpeed = mcfg.DC_MAX_SPEED
+        self.minSpeed = mcfg.DC_MIN_SPEED
 
         GPIO.setup(self.in1, GPIO.OUT)
         GPIO.setup(self.in2, GPIO.OUT)
@@ -57,6 +59,10 @@ class DC:
         if (maxSpeed < 100 and maxSpeed > minSpeed):
             self.maxSpeed = maxSpeed
         return
+    
+    def setIncrement(self, increment):
+        self.increment = increment
+        return
 
     def stop(self):
         GPIO.output(self.in1, GPIO.LOW)
@@ -65,13 +71,15 @@ class DC:
 
 
 class Servo:
+    
     def __init__(self, name, GPIOpin, speed):
         self.name = name
         self.pin = GPIOpin
         self.speed = speed
+        self.increment = mcfg.SERVO_SPEED_INC
 
-        self.maxSpeed = mcfg.DEFAULT_MAX_SPEED
-        self.minSpeed = mcfg.DEFAULT_MIN_SPEED
+        self.maxSpeed = mcfg.SERVO_MAX_SPEED
+        self.minSpeed = mcfg.SERVO_MIN_SPEED
 
         GPIO.setup(self.pin, GPIO.OUT)
         self.p = GPIO.PWM(self.pin, mcfg.DEFAULT_HERTZ)
@@ -82,14 +90,12 @@ class Servo:
         self.p.stop()
 
     def fwd(self, speed=None):
-        if speed is not None:
-            self.setSpeed(speed)
+        self.setSpeed(self.speed + self.increment)
         self.p.ChangeDutyCycle(self.speed)
         return
 
     def bckwd(self, speed=None):
-        if speed is not None:
-            self.setSpeed(speed)
+        self.setSpeed(self.speed - self.increment)
         self.p.ChangeDutyCycle(self.speed)
         return
 
@@ -99,7 +105,7 @@ class Servo:
             self.speed = self.maxSpeed
         elif self.speed < self.minSpeed:
             self.speed = self.minSpeed
-        print("%s speed set to %.0f" % (self.name, self.speed))
+        print("%s angle set to %.0f out of %.0f" % (self.name, self.speed, self.maxSpeed))
         return
 
     def setSpeedLimits(self, minSpeed, maxSpeed):
@@ -108,7 +114,12 @@ class Servo:
         if (maxSpeed < 100 and maxSpeed > minSpeed):
             self.maxSpeed = maxSpeed
         return
+    
+    def setIncrement(self, increment):
+        self.increment = increment
+        return
 
     def stop(self):
+        time.sleep(.1)
         self.p.ChangeDutyCycle(0)
         return

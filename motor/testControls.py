@@ -5,8 +5,10 @@ import pygame
 import time
 import car
 
+keyDelay = .03
+
 def run(car):
-    selM = car.motors[list(car.motors.keys())[0]]
+    selM = car.motors[list(car.motors.keys())[1]]
     pygame.init()
     done = False
     # Creates a pygame screen, be sure to click on the screen to use it
@@ -17,24 +19,24 @@ def run(car):
             keys = pygame.key.get_pressed()
             if keys[pygame.K_w]:
                 selM.fwd()
-                time.sleep(0.1)
+                time.sleep(keyDelay)
             if keys[pygame.K_s]:
                 selM.bckwd()
-                time.sleep(0.1)
+                time.sleep(keyDelay)
             if keys[pygame.K_m]:
                 selM.stop()
                 car.printMotors()
                 selM = car.motors[input("Select a new motor: ")]
-                time.sleep(0.1)
+                time.sleep(keyDelay)
             if keys[pygame.K_UP]:
-                selM.setSpeed(selM.speed + 2.5)
-                time.sleep(0.1)
+                selM.setSpeed(selM.speed + selM.increment)
+                time.sleep(keyDelay)
             if keys[pygame.K_DOWN]:
-                selM.setSpeed(selM.speed - 2.5)
-                time.sleep(0.1)
+                selM.setSpeed(selM.speed - selM.increment)
+                time.sleep(keyDelay)
             if keys[pygame.K_SPACE]:
                 selM.stop()
-                time.sleep(0.1)
+                time.sleep(keyDelay)
             pygame.event.pump()
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
