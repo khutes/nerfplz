@@ -22,10 +22,13 @@ def blinkLED(numTimes):
 # camSock = network.createCameraServer()
 msgSock = network.createMessageServer()
 
+
+# We will want to remove this from a thread and let it run in the main thread
 t = threading.Thread(target=camServ.startCameraFeed)
 threads.append(t)
 t.start()
 
+# Move this block into a new module/thread before starting camera feed
 while True:
     try:
         msg = msgSock.receive()
