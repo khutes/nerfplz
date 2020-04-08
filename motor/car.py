@@ -1,6 +1,6 @@
 import RPi.GPIO as GPIO
 import motor_config as mcfg
-from motor import Motor
+import motor
 
 class Car:
     motors = {}
@@ -14,8 +14,12 @@ class Car:
         GPIO.cleanup()
         return
 
-    def addMotor(self, name, GPIOin1, GPIOin2, GPIOen, speed=10):
-        self.motors[name] = Motor(name, GPIOin1, GPIOin2, GPIOen, speed)
+    def addDC(self, name, GPIOin1, GPIOin2, GPIOen, speed=10):
+        self.motors[name] = motor.DC(name, GPIOin1, GPIOin2, GPIOen, speed)
+        return
+
+    def addServo(self, name, GPIOin, speed=10):
+        self.motors[name] = motor.Servo(name, GPIOin, speed=2.5)
         return
 
     def printMotors(self):
