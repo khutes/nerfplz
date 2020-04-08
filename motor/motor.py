@@ -1,5 +1,5 @@
 import RPi.GPIO as GPIO
-from config import motor_config as mcfg
+import motor_config as mcfg
 
 GPIO.setmode(GPIO.BCM)
 
@@ -10,6 +10,9 @@ class Motor:
         self.in2 = GPIOin2
         self.en = GPIOen
         self.speed = speed
+        
+        self.maxSpeed = mcfg.DEFAULT_MAX_SPEED
+        self.minSpeed = mcfg.DEFAULT_MIN_SPEED
 
         GPIO.setup(self.in1, GPIO.OUT)
         GPIO.setup(self.in2, GPIO.OUT)
@@ -41,11 +44,18 @@ class Motor:
 
     def setSpeed(self, speed):
         self.speed = speed
-        if self.speed > 90:
-            self.speed = 90
-        elif self.speed < 0:
-            self.speed = 0
-        print("%s speed set to %f", self.name, self.speed) 
+        if self.speed > self.maxSpeed:
+            self.speed = self.maxSpeed
+        elif self.speed < self.minSpeed:
+            self.speed = self.minSpeed
+        print("%s speed set to %.0f" % (self.name, self.speed)) 
+        return
+    
+    def setSpeedLimits(self, minSpeed, maxSpeed):
+        if (minSpeed > 0 and minSpeed < maxSpeed):
+            self.minSpeed = minSpeed
+        if (maxSpeed < 100 and maxSpeed > minSpeed):
+            self.maxSpeed = maxSpeed
         return
 
     def stop(self):

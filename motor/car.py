@@ -1,5 +1,5 @@
 import RPi.GPIO as GPIO
-from config import motor_config as mcfg
+import motor_config as mcfg
 from motor import Motor
 
 class Car:

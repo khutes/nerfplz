@@ -1,6 +1,8 @@
 
 
 DEFAULT_HERTZ = 50
+DEFAULT_MAX_SPEED = 90
+DEFAULT_MIN_SPEED = 25
 
 
 def init(car):
