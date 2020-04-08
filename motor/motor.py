@@ -84,6 +84,7 @@ class Servo:
         GPIO.setup(self.pin, GPIO.OUT)
         self.p = GPIO.PWM(self.pin, mcfg.DEFAULT_HERTZ)
         self.p.start(self.speed)
+        self.p.ChangeDutyCycle(0)
         return
 
     def __del__(self):
