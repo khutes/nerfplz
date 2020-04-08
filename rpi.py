@@ -3,6 +3,7 @@ from gpiozero import LED
 from time import sleep
 from nerfCamera import httpServer as camServ
 from config import network_config as cfg
+from config import message_parser as receive_from_pc
 import threading
 
 threads = []
@@ -32,6 +33,8 @@ t.start()
 while True:
     try:
         msg = msgSock.receive()
+		#need to create a car object
+		receive_from_pc.parse(car, msg)
         if msg == "A Button Down":
             light.on()
         else:
