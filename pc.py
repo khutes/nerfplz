@@ -22,13 +22,13 @@ while True:
         time.sleep(5)
 
 # Starting scripts on the pi
-while True:
-    try:
-        ssh.execute()
-        break
-    except Exception as e:
-        print("Error starting server on raspberry pi. Retrying in 5 seconds...")
-        time.sleep(5)
+# while True:
+#     try:
+#         ssh.execute()
+#         break
+#     except Exception as e:
+#         print("Error starting server on raspberry pi. Retrying in 5 seconds...")
+#         time.sleep(5)
 
 try:
     # print("Connecting messaging client...")

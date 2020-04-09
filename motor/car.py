@@ -69,6 +69,10 @@ class Car:
         print("Called car.fire")
         return
 
+    def stop(self):
+        self.motors["dc1"].stop()
+        return
+
     def printMotors(self):
         print(self.motors)
         return

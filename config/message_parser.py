@@ -20,7 +20,10 @@ def parse(sock, car):
 			else:
 				value = int(msg[2:])
 				if "fd" in msg:
-					car.driveForward(value)
+					if value == 0:
+						car.stop()
+					else:
+						car.driveForward(value)
 				elif "tl" in msg:
 					car.steerLeft(value)
 				elif "bd" in msg:
