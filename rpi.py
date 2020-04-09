@@ -4,6 +4,7 @@ from time import sleep
 from nerfCamera import httpServer as camServ
 from config import network_config as cfg
 from config import message_parser as receive_from_pc
+import motor
 import threading
 
 threads = []
@@ -22,30 +23,16 @@ def blinkLED(numTimes):
 # Creating the camera server is currently a blocking function until a connection is established
 # camSock = network.createCameraServer()
 msgSock = network.createMessageServer()
+car = motor.car()
 
+t = threading.Thread(target=receive_from_pc.parse, args=(msgSock, car,))
+threads.append(t)
+t.start()
 
 # We will want to remove this from a thread and let it run in the main thread
 t = threading.Thread(target=camServ.startCameraFeed)
 threads.append(t)
 t.start()
-
-# Move this block into a new module/thread before starting camera feed
-while True:
-    try:
-        msg = msgSock.receive()
-		#need to create a car object
-		receive_from_pc.parse(car, msg)
-        if msg == "A Button Down":
-            light.on()
-        else:
-            light.off()
-        print(msg)
-    except:
-        cfg.ALIVE = False
-        print("Error. Closing connection...")
-        blinkLED(4)
-        del msgSock
-        break
 
 for t in threads:
     t.join()

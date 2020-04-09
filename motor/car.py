@@ -25,11 +25,13 @@ class Car:
     def driveForward(self, factor):
         # Back motor forward
         print("Called car.driveForward")
+        self.motors["dc1"].fwd()
         return
 
     def driveBackward(self, factor):
         # Back motor backward
         print("Called car.driveBackward")
+        self.motors["dc1"].bckwd()
         return
 
     def steerLeft(self, factor):
