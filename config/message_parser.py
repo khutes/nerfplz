@@ -8,7 +8,6 @@ perform the task indicated.
 
 def parse(sock, car):
 
-    # Move this block into a new module/thread before starting camera feed
     while True:
         try:
             msg = sock.receive()
