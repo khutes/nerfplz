@@ -11,8 +11,8 @@ SERVO_MAX_SPEED = 12
 SERVO_SPEED_INC = 0.5
 
 def init(car):
-    car.addDC("dc1", 24, 23, 25, 50)
-    car.addServo("s1", 20, 0)
+    car.addDC("BackMotor", 24, 23, 25, 50)
+    car.addServo("FrontServo", 20, 0)
     # Add motors here as desired
     car.printMotors()
     return

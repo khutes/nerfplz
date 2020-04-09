@@ -21,26 +21,44 @@ def parse(sock, car):
                 value = int(msg[2:])
                 if "fd" in msg:
                     if value == 0:
-                        car.stop()
+                        car.stop("BackMotor")
                     else:
                         car.driveForward(value)
                 elif "tl" in msg:
-                    car.steerLeft(value)
+                    if value == 0:
+                        car.stop("FrontServo")
+                    else:
+                        car.steerLeft(value)
                 elif "bd" in msg:
                     if value == 0:
-                        car.stop()
+                        car.stop("BackMotor")
                     else:
                         car.driveBackward(value)
                 elif "tr" in msg:
-                    car.steerRight(value)
+                    if value == 0:
+                        car.stop("FrontServo")
+                    else:
+                        car.steerRight(value)
                 elif "cu" in msg:
-                    car.lookUp(value)
+                    if value == 0:
+                        car.stop("TiltServo")
+                    else:
+                        car.lookUp(value)
                 elif "cl" in msg:
-                    car.lookLeft(value)
+                    if value == 0:
+                        car.stop("TurretMotor")
+                    else:
+                        car.lookLeft(value)
                 elif "cd" in msg:
-                    car.lookDown(value)
+                    if value == 0:
+                        car.stop("TiltServo")
+                    else:
+                        car.lookDown(value)
                 elif "cr" in msg:
-                    car.lookRight(value)
+                    if value == 0:
+                        car.stop("TurretMotor")
+                    else:
+                        car.lookRight(value)
                 else:
                     print("wrong input")
         except:
