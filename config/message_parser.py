@@ -8,7 +8,6 @@ perform the task indicated.
 
 def parse(sock, car):
 
-    # Move this block into a new module/thread before starting camera feed
     while True:
         try:
             msg = sock.receive()
@@ -25,22 +24,40 @@ def parse(sock, car):
                     else:
                         car.driveForward(value)
                 elif "tl" in msg:
-                    car.steerLeft(value)
+                    if value == 0:
+                        car.stop()
+                    else:
+                        car.steerLeft(value)
                 elif "bd" in msg:
                     if value == 0:
                         car.stop()
                     else:
                         car.driveBackward(value)
                 elif "tr" in msg:
-                    car.steerRight(value)
+                    if value == 0:
+                        car.stop()
+                    else:
+                        car.steerRight(value)
                 elif "cu" in msg:
-                    car.lookUp(value)
+                    if value == 0:
+                        car.stop()
+                    else:
+                        car.lookUp(value)
                 elif "cl" in msg:
-                    car.lookLeft(value)
+                    if value == 0:
+                        car.stop()
+                    else:
+                        car.lookLeft(value)				
                 elif "cd" in msg:
-                    car.lookDown(value)
+                    if value == 0:
+                        car.stop()
+                    else:
+                        car.lookDown(value)				
                 elif "cr" in msg:
-                    car.lookRight(value)
+                    if value == 0:
+                        car.stop()
+                    else:
+                        car.lookRight(value)				
                 else:
                     print("wrong input")
         except:
