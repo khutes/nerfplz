@@ -1,6 +1,6 @@
 import pygame
 
-#Modified the xbox_controller.py file to suit the needs of our project. 
+#Modified the xbox_controller.py file to suit the needs of our project.
 
 # buttons
 A = 0
@@ -24,8 +24,8 @@ TRIGGERS = 2
 
 class Controller:
     id_num = 0
-    
-    def __init__(self, dead_zone = 0.15):
+
+    def __init__(self, dead_zone=0.15):
         """
         Initializes a controller. IDs for controllers begin at 0 and increment by 1
         each time a controller is initialized.
@@ -33,7 +33,7 @@ class Controller:
         Args:
             dead_zone: The size of dead zone for the analog sticks (default 0.15)
         """
-        
+
         self.joystick = pygame.joystick.Joystick(Controller.id_num)
         self.joystick.init()
         self.dead_zone = dead_zone
@@ -79,7 +79,7 @@ class Controller:
             A tuple with the state of each button. 1 is pressed, 0 is unpressed.
         """
 
-        return (self.joystick.get_button(A),self.joystick.get_button(B),self.joystick.get_button(X),
+        return (self.joystick.get_button(A), self.joystick.get_button(B), self.joystick.get_button(X),
                 self.joystick.get_button(Y),
                 self.joystick.get_button(LEFT_BUMP),
                 self.joystick.get_button(RIGHT_BUMP),
@@ -87,7 +87,7 @@ class Controller:
                 self.joystick.get_button(START),
                 self.joystick.get_button(LEFT_STICK_BTN),
                 self.joystick.get_button(RIGHT_STICK_BTN))
-				
+
     def get_left_stick(self):
         """
         Gets the state of the left analog stick.
@@ -101,8 +101,10 @@ class Controller:
             Positive values are right and down.
         """
 
-        left_stick_x = self.dead_zone_adjustment(self.joystick.get_axis(LEFT_STICK_X))
-        left_stick_y = self.dead_zone_adjustment(self.joystick.get_axis(LEFT_STICK_Y))
+        left_stick_x = self.dead_zone_adjustment(
+            self.joystick.get_axis(LEFT_STICK_X))
+        left_stick_y = self.dead_zone_adjustment(
+            self.joystick.get_axis(LEFT_STICK_Y))
 
         return (left_stick_x, left_stick_y)
 
@@ -119,8 +121,10 @@ class Controller:
             Positive values are right and down.
         """
 
-        right_stick_x = self.dead_zone_adjustment(self.joystick.get_axis(RIGHT_STICK_X))
-        right_stick_y = self.dead_zone_adjustment(self.joystick.get_axis(RIGHT_STICK_Y))
+        right_stick_x = self.dead_zone_adjustment(
+            self.joystick.get_axis(RIGHT_STICK_X))
+        right_stick_y = self.dead_zone_adjustment(
+            self.joystick.get_axis(RIGHT_STICK_Y))
 
         return (right_stick_x, right_stick_y)
 
@@ -164,7 +168,4 @@ class Controller:
         right = int(hat_x == 1)
         down = int(hat_y == -1)
         left = int(hat_x == -1)
-
-
-
         return up, right, down, left

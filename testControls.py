@@ -3,7 +3,7 @@
 #Integrate this with networking and camera
 import pygame
 import time
-from motor import car
+from car import car
 
 keyDelay = .03
 

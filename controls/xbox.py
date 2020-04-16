@@ -3,8 +3,9 @@
 #Integrate this with networking and camera 
 import pygame
 import time
-from xbox import controller
+from config import controller_config as controller
 from config import messages_config as send_to_pi
+
 
 def run(cont):
 	pygame.init()

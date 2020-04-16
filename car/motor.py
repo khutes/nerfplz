@@ -1,5 +1,5 @@
 import RPi.GPIO as GPIO
-from motor import motor_config as mcfg
+from config import motor_config as mcfg
 import time
 
 GPIO.setmode(GPIO.BCM)

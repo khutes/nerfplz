@@ -1,10 +1,10 @@
 from config import network_config as cfg
 from config import messages_config as msgcfg
+from config import controller_config as xboxCont
 from network import network
 from network import ssh
-from xbox import xbox
-from xbox import controller as xboxCont
-from keyboard import keyboard
+from controls import xbox
+from controls import keyboard
 import pygame
 import webbrowser
 import time
@@ -31,16 +31,6 @@ while True:
         time.sleep(5)
 
 try:
-    # print("Connecting messaging client...")
-    # t = threading.Thread(target = network.createMessageClient)
-    # threads.append(t)
-    # t.start()
-
-    # Creating the camera feed
-    # print("Opening camera feed...")
-    # time.sleep(1)
-    # camURL = "http://[" + str(cfg.HOST) + "]:" + str(cfg.CAMERA_PORT)
-    # webbrowser.open(camURL)
 
     print("Connecting messaging client..")
     socket = network.createMessageClient()
@@ -48,27 +38,28 @@ try:
 
     try:
         cont = xboxCont.Controller()
-        print("Connecting xbox...")
+        print("Using xbox controller...")
         t = threading.Thread(target=xbox.run, args=(cont,))
         threads.append(t)
         t.start()
     except Exception as e:
         print("No xbox controller detected\nUsing keyboard controls...")
-        print("Connecting keyboard...")
+        print("Using keyboard...")
         t = threading.Thread(target = keyboard.run)
         threads.append(t)
         t.start()
 
-    # print("Connecting to Pi Camera...")
-    # camSock = network.createCameraClient()
-    # print("Connected.  Starting feed...")
-    # camClient.viewCameraFeed(camSock)
+    # Creating the camera feed
+    # print("Opening camera feed...")
+    # time.sleep(1)
+    # camURL = "http://[" + str(cfg.HOST) + "]:" + str(cfg.CAMERA_PORT)
+    # webbrowser.open(camURL)
 
 except Exception as e:
     print("Error operating client: " + str(e))
     print("Shutting down system...")
 
-print("Collecting threads...")
+print("Waiting for system shutdown...")
 for t in threads:
     t.join()
     
