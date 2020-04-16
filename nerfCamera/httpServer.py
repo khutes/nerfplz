@@ -106,7 +106,7 @@ def startCameraFeed():
         #camera.rotation = 90
         camera.start_recording(output, format='mjpeg')
         try:
-            address = ('::', 8000)
+            address = ('::', cfg.CAMERA_PORT)
             server = HTTPServerV6(address, StreamingHandler)
             t = threading.Thread(target=__shutDownThread, args=(server,))
             threads.append(t)
