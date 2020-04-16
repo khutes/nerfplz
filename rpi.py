@@ -15,7 +15,7 @@ t = threading.Thread(target=parser.parse, args=(msgSock, car,))
 threads.append(t)
 t.start()
 
-camServ.startCameraFeed()
+# camServ.startCameraFeed()
 
 for t in threads:
     t.join()

@@ -50,10 +50,10 @@ try:
         t.start()
 
     # Creating the camera feed
-    print("Opening camera feed...")
-    time.sleep(1)
-    camURL = "http://[" + str(cfg.HOST) + "]:" + str(cfg.CAMERA_PORT)
-    webbrowser.open(camURL)
+    # print("Opening camera feed...")
+    # time.sleep(1)
+    # camURL = "http://[" + str(cfg.HOST) + "]:" + str(cfg.CAMERA_PORT)
+    # webbrowser.open(camURL)
 
 except Exception as e:
     print("Error operating client: " + str(e))
