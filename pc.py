@@ -50,10 +50,10 @@ try:
         t.start()
 
     # Creating the camera feed
-    # print("Opening camera feed...")
-    # time.sleep(1)
-    # camURL = "http://[" + str(cfg.HOST) + "]:" + str(cfg.CAMERA_PORT)
-    # webbrowser.open(camURL)
+    print("Opening camera feed...")
+    time.sleep(1)
+    camURL = "http://[" + str(cfg.HOST) + "]:" + str(cfg.CAMERA_PORT)
+    webbrowser.open(camURL)
 
 except Exception as e:
     print("Error operating client: " + str(e))
@@ -63,9 +63,3 @@ print("Waiting for system shutdown...")
 for t in threads:
     t.join()
     
-# This option exists if we want to kill the server forcibly from the pc
-# Currently it should all be handled from the rpi 
-# try:
-#     ssh.killServer()
-# except Exception as e:
-#     print("Error killing server on RPI\nWARNING: Processes may still be running on RPI")

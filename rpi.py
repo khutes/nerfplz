@@ -15,11 +15,7 @@ t = threading.Thread(target=parser.parse, args=(msgSock, car,))
 threads.append(t)
 t.start()
 
-# We will want to remove this from a thread and let it run in the main thread
 camServ.startCameraFeed()
-# t = threading.Thread(target=camServ.startCameraFeed)
-# threads.append(t)
-# t.start()
 
 for t in threads:
     t.join()
