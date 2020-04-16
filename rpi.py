@@ -1,7 +1,7 @@
 from network import network
+from network import message_parser as parser
 from time import sleep
 from config import network_config as cfg
-from config import message_parser as parser
 from car import car
 from nerfCamera import httpServer as camServ
 import threading
