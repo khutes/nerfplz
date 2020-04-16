@@ -99,7 +99,7 @@ def __shutDownThread(server):
 output = ''
 def startCameraFeed():
     threads = []
-    with picamera.PiCamera(resolution='360x240', framerate=5) as camera:
+    with picamera.PiCamera(resolution=(480, 360), framerate=30) as camera:
         global output
         output = StreamingOutput()
         #Uncomment the next line to change your Pi's Camera rotation (in degrees)
