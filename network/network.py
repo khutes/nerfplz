@@ -111,6 +111,3 @@ def __createServer(port):
 def createMessageServer():
     return __createServer(cfg.MESSAGE_PORT)
 
-def createCameraServer():
-    return __createServer(cfg.CAMERA_PORT)
-        

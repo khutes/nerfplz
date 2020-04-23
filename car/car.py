@@ -64,7 +64,7 @@ class Car:
         self.motors["TiltServo"].fwd()
         return
 
-    def lookDown(self, fact0r):
+    def lookDown(self, factor):
         # Tilt servo down
         print("Called car.lookDown")
         self.motors["TiltServo"].bckwd()
