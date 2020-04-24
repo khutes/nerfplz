@@ -19,7 +19,7 @@ class Car:
         return
 
     def addServo(self, name, GPIOin, angle=10):
-        self.motors[name] = motor.Servo(name, GPIOin, angle=2.5)
+        self.motors[name] = motor.Servo(name, GPIOin, angle)
         return
 
     def driveForward(self, factor):
