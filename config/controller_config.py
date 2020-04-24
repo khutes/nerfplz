@@ -25,7 +25,7 @@ TRIGGERS = 2
 class Controller:
     id_num = 0
 
-    def __init__(self, dead_zone=0.15):
+    def __init__(self, dead_zone=0.1):
         """
         Initializes a controller. IDs for controllers begin at 0 and increment by 1
         each time a controller is initialized.

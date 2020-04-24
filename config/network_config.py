@@ -6,7 +6,7 @@ the commands to execute, upload and download file path details.
 """
 
 #Server credential details needed for ssh 
-HOST = ''
+HOST = 'fe80:37ed:7061:ac73:ib95'
 HOSTNAME = 'nerfpi'
 USERNAME='pi'
 PASSWORD='pi'

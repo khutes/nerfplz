@@ -13,7 +13,7 @@ import threading
 threads = []
 
 # Find the pi on the network
-while True:
+while False: # Change to True
     try:
         cfg.init()
         break

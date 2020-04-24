@@ -17,28 +17,28 @@ def run():
 		# event handling
 			keys = pygame.key.get_pressed()
 			if keys[pygame.K_w]:
-				send_to_pi.messages(1, 0.5)
+				send_to_pi.messages(1, -1)
 				time.sleep(0.1)				
 			if keys[pygame.K_a]:
-				send_to_pi.messages(2, 1.0)
+				send_to_pi.messages(2, -1)
 				time.sleep(0.1)					
 			if keys[pygame.K_s]:
-				send_to_pi.messages(3, 0.5)
+				send_to_pi.messages(3, -1)
 				time.sleep(0.1)					
 			if keys[pygame.K_d]:
-				send_to_pi.messages(4, 1.0)
+				send_to_pi.messages(4, -1)
 				time.sleep(0.1)					
 			if keys[pygame.K_UP]:
-				send_to_pi.messages(5, 0.5)
+				send_to_pi.messages(5, -1)
 				time.sleep(0.1)					
 			if keys[pygame.K_LEFT]:
-				send_to_pi.messages(6, 0.5)
+				send_to_pi.messages(6, -1)
 				time.sleep(0.1)					
 			if keys[pygame.K_DOWN]:
-				send_to_pi.messages(7, 0.5)
+				send_to_pi.messages(7, -1)
 				time.sleep(0.1)					
 			if keys[pygame.K_RIGHT]:
-				send_to_pi.messages(8, 0.5)
+				send_to_pi.messages(8, -1)
 				time.sleep(0.1)					
 			if keys[pygame.K_SPACE]:
 				send_to_pi.messages(9, 0)

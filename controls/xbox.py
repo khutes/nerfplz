@@ -51,23 +51,23 @@ def run(cont):
 			
 		# handle joysticks
 		left_x, left_y = cont.get_left_stick()
-		if left_x > 0.1 : #Turn Right
+		if left_x > cont.dead_zone:  # Turn Right
 			send_to_pi.messages(4,left_x)
 			time.sleep(0.1)
-		if left_x < -0.1 : #Turn Left
+		if left_x < -cont.dead_zone : #Turn Left
 			send_to_pi.messages(2,left_x)
 			time.sleep(0.1)
 
 		right_x, right_y = cont.get_right_stick()
-		if right_x > 0.1 : #Camera Right
+		if right_x > cont.dead_zone:  # Camera Right
 			send_to_pi.messages(8,right_x)
 			time.sleep(0.1)
-		if right_x < -0.1 : #Camera Left
+		if right_x < -cont.dead_zone:  # Camera Left
 			send_to_pi.messages(6,right_x)
 			time.sleep(0.1)
-		if right_y > 0.1 : #Camera Down
+		if right_y > cont.dead_zone:  # Camera Down
 			send_to_pi.messages(7,right_y)
 			time.sleep(0.1)
-		if right_y < -0.1 : #Camera Up
+		if right_y < -cont.dead_zone:  # Camera Up
 			send_to_pi.messages(5,right_y)
 			time.sleep(0.1)
