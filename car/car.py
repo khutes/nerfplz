@@ -18,8 +18,8 @@ class Car:
         self.motors[name] = motor.DC(name, GPIOin1, GPIOin2, GPIOen, speed, minS, maxS)
         return
 
-    def addServo(self, name, GPIOin, angle=90):
-        self.motors[name] = motor.Servo(name, GPIOin, angle)
+    def addServo(self, name, GPIOin, angle=90, minAngle=mcfg.SERVO_MIN_ANGLE, maxAngle=mcfg.SERVO_MAX_ANGLE, increment=mcfg.SERVO_ANGLE_INC):
+        self.motors[name] = motor.Servo(name, GPIOin, angle, minAngle, maxAngle, increment)
         return
 
     def driveForward(self, factor):

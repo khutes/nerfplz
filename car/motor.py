@@ -72,14 +72,14 @@ class DC:
 
 class Servo:
     
-    def __init__(self, name, GPIOpin, angle):
+    def __init__(self, name, GPIOpin, angle, minAngle, maxAngle, increment):
         self.name = name
         self.pin = GPIOpin
         self.angle = angle
-        self.increment = mcfg.SERVO_ANGLE_INC
+        self.increment = increment
 
-        self.maxAngle = mcfg.SERVO_MAX_ANGLE
-        self.minAngle = mcfg.SERVO_MIN_ANGLE
+        self.minAngle = minAngle
+        self.maxAngle = maxAngle
 
         GPIO.setup(self.pin, GPIO.OUT)
         self.p = GPIO.PWM(self.pin, mcfg.DEFAULT_HERTZ)
