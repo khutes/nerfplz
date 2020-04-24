@@ -13,7 +13,7 @@ import threading
 threads = []
 
 # Find the pi on the network
-while False: # Change to True
+while True: # Change to True
     try:
         cfg.init()
         break
@@ -22,7 +22,7 @@ while False: # Change to True
         time.sleep(5)
 
 # Starting scripts on the pi
-while False:
+while True:
     try:
         ssh.execute()
         break
@@ -32,22 +32,22 @@ while False:
 
 try:
 
-    # print("Connecting messaging client..")
-    # socket = network.createMessageClient()
-    # msgcfg.setSocket(socket)
+    print("Connecting messaging client..")
+    socket = network.createMessageClient()
+    msgcfg.setSocket(socket)
 
-    # try:
-    #     cont = xboxCont.Controller()
-    #     print("Using xbox controller...")
-    #     t = threading.Thread(target=xbox.run, args=(cont,))
-    #     threads.append(t)
-    #     t.start()
-    # except Exception as e:
-    #     print("No xbox controller detected\nUsing keyboard controls...")
-    #     print("Using keyboard...")
-    #     t = threading.Thread(target = keyboard.run)
-    #     threads.append(t)
-    #     t.start()
+    try:
+        cont = xboxCont.Controller()
+        print("Using xbox controller...")
+        t = threading.Thread(target=xbox.run, args=(cont,))
+        threads.append(t)
+        t.start()
+    except Exception as e:
+        print("No xbox controller detected\nUsing keyboard controls...")
+        print("Using keyboard...")
+        t = threading.Thread(target = keyboard.run)
+        threads.append(t)
+        t.start()
 
     # Creating the camera feed
     print("Opening camera feed...")
