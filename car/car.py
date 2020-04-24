@@ -1,6 +1,7 @@
 import RPi.GPIO as GPIO
 from config import motor_config as mcfg
 from car import motor
+import time
 
 class Car:
     motors = {}
@@ -73,6 +74,7 @@ class Car:
     def fire(self):
         # Fire motor
         print("Called car.fire")
+        time.sleep(5)
         self.motors["LoadMotor"].fwd()
         self.motors["LaunchMotor"].fwd()
         return
