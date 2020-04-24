@@ -5,7 +5,7 @@ import pygame
 import time
 from car import car
 
-keyDelay = .05
+keyDelay = .1
 
 def run(car):
     selM = car.motors[list(car.motors.keys())[0]]
