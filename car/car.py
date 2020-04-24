@@ -73,7 +73,8 @@ class Car:
     def fire(self):
         # Fire motor
         print("Called car.fire")
-        self.motors["FireMotor"].fwd()
+        self.motors["LoadMotor"].fwd()
+        self.motors["LaunchMotor"].fwd()
         return
 
     def stop(self, motor):
