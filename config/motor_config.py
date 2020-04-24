@@ -12,7 +12,7 @@ SERVO_ANGLE_INC = 5
 
 def init(car):
     # car.addDC("BackMotor", 24, 23, 25, 50)
-    car.addServo("FrontServo", 17, 2.5)
+    car.addServo("FrontServo", 17, 90)
     # Add motors here as desired
     car.printMotors()
     return
