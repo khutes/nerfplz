@@ -41,8 +41,8 @@ class DC:
         if speed is not None:
             self.setSpeed(speed)
         self.p.ChangeDutyCycle(self.speed)
-        GPIO.output(self.in1, GPIO.LOW)
-        GPIO.output(self.in2, GPIO.HIGH)
+        GPIO.output(self.in2, GPIO.LOW)
+        GPIO.output(self.in1, GPIO.HIGH)
         return
 
     def setSpeed(self, speed):
