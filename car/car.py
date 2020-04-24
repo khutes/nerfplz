@@ -75,8 +75,7 @@ class Car:
         # Fire motor
         print("Called car.fire")
         time.sleep(5)
-        self.motors["LoadMotor"].fwd()
-        self.motors["LaunchMotor"].fwd()
+        self.motors["FireMotor"].fwd()
         return
 
     def stop(self, motor):
