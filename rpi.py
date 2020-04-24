@@ -8,12 +8,12 @@ import threading
 
 threads = []
 
-# msgSock = network.createMessageServer()
-# car = car.Car()
+msgSock = network.createMessageServer()
+car = car.Car()
 
-# t = threading.Thread(target=parser.parse, args=(msgSock, car,))
-# threads.append(t)
-# t.start()
+t = threading.Thread(target=parser.parse, args=(msgSock, car,))
+threads.append(t)
+t.start()
 
 camServ.startCameraFeed()
 

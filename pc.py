@@ -13,7 +13,7 @@ import threading
 threads = []
 
 # Find the pi on the network
-while True: # Change to True
+while False: # Change to True
     try:
         cfg.init()
         break
@@ -22,7 +22,7 @@ while True: # Change to True
         time.sleep(5)
 
 # Starting scripts on the pi
-while True:
+while False:
     try:
         ssh.execute()
         break
