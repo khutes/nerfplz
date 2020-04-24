@@ -14,8 +14,8 @@ class Car:
         GPIO.cleanup()
         return
 
-    def addDC(self, name, GPIOin1, GPIOin2, GPIOen, speed=10):
-        self.motors[name] = motor.DC(name, GPIOin1, GPIOin2, GPIOen, speed)
+    def addDC(self, name, GPIOin1, GPIOin2, GPIOen, speed=10, minS=mcfg.DC_MIN_SPEED, maxS=mcfg.DC_MAX_SPEED):
+        self.motors[name] = motor.DC(name, GPIOin1, GPIOin2, GPIOen, speed, minS, maxS)
         return
 
     def addServo(self, name, GPIOin, angle=90):

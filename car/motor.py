@@ -5,7 +5,7 @@ import time
 GPIO.setmode(GPIO.BCM)
 
 class DC:
-    def __init__(self, name, GPIOin1, GPIOin2, GPIOen, speed):
+    def __init__(self, name, GPIOin1, GPIOin2, GPIOen, speed, minS, maxS):
         self.name = name
         self.in1 = GPIOin1
         self.in2 = GPIOin2
@@ -13,8 +13,8 @@ class DC:
         self.speed = speed
         self.increment = mcfg.DC_SPEED_INC
         
-        self.maxSpeed = mcfg.DC_MAX_SPEED
-        self.minSpeed = mcfg.DC_MIN_SPEED
+        self.minSpeed = minS
+        self.maxSpeed = maxS
 
         GPIO.setup(self.in1, GPIO.OUT)
         GPIO.setup(self.in2, GPIO.OUT)

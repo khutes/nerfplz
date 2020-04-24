@@ -12,8 +12,8 @@ SERVO_MAX_ANGLE = 135
 SERVO_ANGLE_INC = 1
 
 def init(car):
-    car.addDC("BackMotor", 16, 20, 21, 40)
-    car.addDC("TurretMotor", 19, 26, 13, 15)
+    car.addDC("BackMotor", 16, 20, 21, 40, 15, 100)
+    car.addDC("TurretMotor", 19, 13, 26, 15)
     car.addDC("FireMotor", 5, 11, 6, 50)
 
     car.addServo("FrontServo", 17)
