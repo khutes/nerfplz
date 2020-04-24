@@ -18,7 +18,7 @@ class Car:
         self.motors[name] = motor.DC(name, GPIOin1, GPIOin2, GPIOen, speed)
         return
 
-    def addServo(self, name, GPIOin, angle=10):
+    def addServo(self, name, GPIOin, angle=90):
         self.motors[name] = motor.Servo(name, GPIOin, angle)
         return
 
