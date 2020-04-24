@@ -8,7 +8,7 @@ DC_SPEED_INC = 2.5
 
 SERVO_MIN_ANGLE = 45
 SERVO_MAX_ANGLE = 135
-SERVO_ANGLE_INC = 5
+SERVO_ANGLE_INC = 1
 
 def init(car):
     # car.addDC("BackMotor", 24, 23, 25, 50)
