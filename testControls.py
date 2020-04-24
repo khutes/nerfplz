@@ -8,7 +8,7 @@ from car import car
 keyDelay = .03
 
 def run(car):
-    selM = car.motors[list(car.motors.keys())[1]]
+    selM = car.motors[list(car.motors.keys())[0]]
     pygame.init()
     done = False
     # Creates a pygame screen, be sure to click on the screen to use it

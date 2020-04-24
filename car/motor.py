@@ -72,48 +72,50 @@ class DC:
 
 class Servo:
     
-    def __init__(self, name, GPIOpin, speed):
+    def __init__(self, name, GPIOpin, angle):
         self.name = name
         self.pin = GPIOpin
-        self.speed = speed
-        self.increment = mcfg.SERVO_SPEED_INC
+        self.angle = angle
+        self.increment = mcfg.SERVO_ANGLE_INC
 
-        self.maxSpeed = mcfg.SERVO_MAX_SPEED
-        self.minSpeed = mcfg.SERVO_MIN_SPEED
+        self.maxAngle = mcfg.SERVO_MAX_ANGLE
+        self.minAngle = mcfg.SERVO_MIN_ANGLE
 
         GPIO.setup(self.pin, GPIO.OUT)
         self.p = GPIO.PWM(self.pin, mcfg.DEFAULT_HERTZ)
-        self.p.start(self.speed)
+        self.p.start(self.angle)
         self.p.ChangeDutyCycle(0)
         return
 
     def __del__(self):
         self.p.stop()
 
-    def fwd(self, speed=None):
-        self.setSpeed(self.speed + self.increment)
-        self.p.ChangeDutyCycle(self.speed)
+    def fwd(self, angle=None):
+        self.setAngle(self.angle + self.increment)
+        dutyCycle = self.angle / 18 + 2.5
+        self.p.ChangeDutyCycle(dutyCycle)
         return
 
-    def bckwd(self, speed=None):
-        self.setSpeed(self.speed - self.increment)
-        self.p.ChangeDutyCycle(self.speed)
+    def bckwd(self, angle=None):
+        self.setAngle(self.angle - self.increment)
+        dutyCycle = self.angle / 18 + 2.5
+        self.p.ChangeDutyCycle(dutyCycle)
         return
 
-    def setSpeed(self, speed):
-        self.speed = speed
-        if self.speed > self.maxSpeed:
-            self.speed = self.maxSpeed
-        elif self.speed < self.minSpeed:
-            self.speed = self.minSpeed
-        print("%s angle set to %.0f out of %.0f" % (self.name, self.speed, self.maxSpeed))
+    def setAngle(self, angle):
+        self.angle = angle
+        if self.angle > self.maxAngle:
+            self.angle = self.maxAngle
+        elif self.angle < self.minAngle:
+            self.angle = self.minAngle
+        print("%s angle set to %.0f out of %.0f" % (self.name, self.angle, self.maxAngle))
         return
 
-    def setSpeedLimits(self, minSpeed, maxSpeed):
-        if (minSpeed > 0 and minSpeed < maxSpeed):
-            self.minSpeed = minSpeed
-        if (maxSpeed < 100 and maxSpeed > minSpeed):
-            self.maxSpeed = maxSpeed
+    def setAngleLimits(self, minAngle, maxAngle):
+        if (minAngle > 0 and minAngle < maxAngle):
+            self.minAngle = minAngle
+        if (maxAngle < 180 and maxAngle > minAngle):
+            self.maxAngle = maxAngle
         return
     
     def setIncrement(self, increment):
