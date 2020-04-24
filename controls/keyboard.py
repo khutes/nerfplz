@@ -50,28 +50,28 @@ def run():
 					done=True
 				if event.type == pygame.KEYUP:
 					if event.key == pygame.K_w:
-						send_to_pi.messages(1, 0.0)
+						send_to_pi.messages(1, 0)
 				if event.type == pygame.KEYUP:
 					if event.key == pygame.K_a:
-						send_to_pi.messages(2, 0.0)
+						send_to_pi.messages(2, 0)
 				if event.type == pygame.KEYUP:
 					if event.key == pygame.K_s:
-						send_to_pi.messages(3, 0.0)
+						send_to_pi.messages(3, 0)
 				if event.type == pygame.KEYUP:
 					if event.key == pygame.K_d:
-						send_to_pi.messages(4, 0.0)
+						send_to_pi.messages(4, 0)
 				if event.type == pygame.KEYUP:
 					if event.key == pygame.K_UP:
-						send_to_pi.messages(5, 0.0)
+						send_to_pi.messages(5, 0)
 				if event.type == pygame.KEYUP:
 					if event.key == pygame.K_LEFT:
-						send_to_pi.messages(6, 0.0)
+						send_to_pi.messages(6, 0)
 				if event.type == pygame.KEYUP:
 					if event.key == pygame.K_DOWN:
-						send_to_pi.messages(7, 0.0)
+						send_to_pi.messages(7, 0)
 				if event.type == pygame.KEYUP:
 					if event.key == pygame.K_RIGHT:
-						send_to_pi.messages(8, 0.0)
+						send_to_pi.messages(8, 0)
 						
 	except KeyboardInterrupt:
 		pygame.quit()
