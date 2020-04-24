@@ -79,6 +79,7 @@ class Car:
         return
 
     def stop(self, motor):
+        print("Stopped " + str(motor))
         self.motors[motor].stop()
         return
 

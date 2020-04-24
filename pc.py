@@ -13,7 +13,7 @@ import threading
 threads = []
 
 # Find the pi on the network
-while False: # Change to True
+while True: # Change to True
     try:
         cfg.init()
         break
@@ -53,7 +53,7 @@ try:
     print("Opening camera feed...")
     time.sleep(1)
     camURL = "http://[" + str(cfg.HOST) + "]:" + str(cfg.CAMERA_PORT)
-    webbrowser.open(camURL)
+    # webbrowser.open(camURL)
 
 except Exception as e:
     print("Error operating client: " + str(e))
