@@ -17,7 +17,7 @@ def init(car):
     car.addDC("FireMotor", 5, 11, 6, 50)
 
     car.addServo("FrontServo", 17, increment=5)
-    car.addServo("TiltServo", 27)
+    car.addServo("TiltServo", 27, minAngle=75)
 
     car.printMotors()
     return
