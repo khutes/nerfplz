@@ -15,7 +15,7 @@ def init(car):
     # name, in1, in2, ena, init speed, min speed, max speed
     car.addDC("BackMotor", 16, 20, 21, 40, 15, 100)
     car.addDC("TurretMotor", 19, 13, 26, 15)
-    car.addDC("FireMotor", 5, 11, 6, speed=15)
+    car.addDC("FireMotor", 5, 11, 4, speed=15)
 
     # name, GPIO, init angle, min angle, max angle, increment
     # car.addServo("FrontServo", 17, increment=5)
