@@ -23,6 +23,7 @@ class DC:
         GPIO.output(self.in2, GPIO.LOW)
         self.p = GPIO.PWM(self.en, mcfg.DEFAULT_HERTZ)
         self.p.start(self.speed)
+        self.p.ChangeDutyCycle(0)
         return
 
     def __del__(self):
