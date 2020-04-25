@@ -88,6 +88,10 @@ class Servo:
         self.p = GPIO.PWM(self.pin, mcfg.DEFAULT_HERTZ)
         self.p.start(dutyCycle)
         self.p.ChangeDutyCycle(0)
+        self.fwd()
+        self.stop()
+        self.bckwd()
+        self.stop()
         return
 
     def __del__(self):
