@@ -30,16 +30,16 @@ class DC:
         self.p.stop()
 
     def fwd(self, speed=None):
-        if speed is not None and speed > 0:
-            self.setSpeed(int(100 * speed))
+        if speed is not None and abs(speed) > 0:
+            self.setSpeed(int(100 * abs(speed)))
         self.p.ChangeDutyCycle(self.speed)
         GPIO.output(self.in1, GPIO.LOW)
         GPIO.output(self.in2, GPIO.HIGH)
         return
 
     def bckwd(self, speed=None):
-        if speed is not None and speed > 0:
-            self.setSpeed(int(100 * speed))
+        if speed is not None and abs(speed) > 0:
+            self.setSpeed(int(100 * abs(speed)))
         self.p.ChangeDutyCycle(self.speed)
         GPIO.output(self.in2, GPIO.LOW)
         GPIO.output(self.in1, GPIO.HIGH)
@@ -94,8 +94,8 @@ class Servo:
         self.p.stop()
 
     def fwd(self, increment=None):
-        if increment is not None and increment > 0:
-            self.setAngle(self.angle + increment * self.increment)
+        if increment is not None and abs(increment) > 0:
+            self.setAngle(self.angle + abs(increment) * self.increment)
         else:
             self.setAngle(self.angle + self.increment)
         dutyCycle = self.angle / 18 + 2.5
@@ -103,8 +103,8 @@ class Servo:
         return
 
     def bckwd(self, increment=None):
-        if increment is not None and increment > 0:
-            self.setAngle(self.angle - increment * self.increment)
+        if increment is not None and abs(increment) > 0:
+            self.setAngle(self.angle - abs(increment) * self.increment)
         else:
             self.setAngle(self.angle - self.increment)
         dutyCycle = self.angle / 18 + 2.5
