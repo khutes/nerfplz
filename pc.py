@@ -36,11 +36,11 @@ try:
     msgcfg.setSocket(socket)
 
     try:
-        raise Exception
         print("Using xbox controller...")
         t = threading.Thread(target=xbox.run)
         threads.append(t)
         t.start()
+        time.sleep(1.0)
     except Exception as e:
         print("No xbox controller detected\nUsing keyboard controls...")
         print("Using keyboard...")

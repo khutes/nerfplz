@@ -25,7 +25,7 @@ def parse(sock, car):
 
             if msg == "fire":
                 lock.acquire()
-                if not Firing:
+                if not firing:
                     firing = True
                     t = threading.Thread(target=car.fire)
                     threads.append(t)
