@@ -45,8 +45,14 @@ def run():
 		if trigger > 0.2 : #Right Trigger
 			send_to_pi.messages(1,trigger)
 			time.sleep(0.1)
+		else:
+			send_to_pi.messages(1, 0)
+			time.sleep(0.1)
 		if trigger < -0.3 : #Left Trigger
 			send_to_pi.messages(3,trigger)
+			time.sleep(0.1)
+		else:
+			send_to_pi.messages(3, 0)
 			time.sleep(0.1)
 			
 		# handle joysticks
@@ -54,20 +60,30 @@ def run():
 		if left_x > cont.dead_zone:  # Turn Right
 			send_to_pi.messages(4,left_x)
 			time.sleep(0.1)
-		if left_x < -cont.dead_zone : #Turn Left
+		elif left_x < -cont.dead_zone: #Turn Left
 			send_to_pi.messages(2,left_x)
+			time.sleep(0.1)
+		else:
+			send_to_pi.messages(2, 0)
 			time.sleep(0.1)
 
 		right_x, right_y = cont.get_right_stick()
 		if right_x > cont.dead_zone:  # Camera Right
 			send_to_pi.messages(8,right_x)
 			time.sleep(0.1)
-		if right_x < -cont.dead_zone:  # Camera Left
+		elif right_x < -cont.dead_zone:  # Camera Left
 			send_to_pi.messages(6,right_x)
 			time.sleep(0.1)
+		else:
+			send_to_pi.messages(8, 0)
+			time.sleep(0.1)
+
 		if right_y > cont.dead_zone:  # Camera Down
 			send_to_pi.messages(7,right_y)
 			time.sleep(0.1)
-		if right_y < -cont.dead_zone:  # Camera Up
+		elif right_y < -cont.dead_zone:  # Camera Up
 			send_to_pi.messages(5,right_y)
+			time.sleep(0.1)
+		else:
+			send_to_pi.messages(7, 0)
 			time.sleep(0.1)
