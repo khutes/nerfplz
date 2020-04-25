@@ -16,19 +16,15 @@ threads = []
 while True: # Change to True
     try:
         cfg.init()
-        break
     except Exception as e:
-        print("Error obtaining raspberry pi address. Retrying in 5 seconds...")
-        time.sleep(5)
-
-# Starting scripts on the pi
-while True:
-    try:
+        print("Error obtaining raspberry pi address. Retrying...")
+        continue
+    # Starting scripts on the pi
+    try:  
         ssh.execute()
         break
     except Exception as e:
-        print("Error starting server on raspberry pi. Retrying in 5 seconds...")
-        time.sleep(5)
+        print("Error starting server on raspberry pi. Retrying...")
 
 try:
 
@@ -51,9 +47,8 @@ try:
 
     # Creating the camera feed
     print("Opening camera feed...")
-    time.sleep(1)
     camURL = "http://[" + str(cfg.HOST) + "]:" + str(cfg.CAMERA_PORT)
-    webbrowser.open(camURL)
+    # webbrowser.open(camURL)
 
 except Exception as e:
     print("Error operating client: " + str(e))

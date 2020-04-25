@@ -98,7 +98,7 @@ class Servo:
         if increment is not None and increment > 0:
             self.setAngle(self.angle + increment * self.increment)
         else:
-            self.setAngle(self.angle - self.increment)
+            self.setAngle(self.angle + self.increment)
         dutyCycle = self.angle / 18 + 2.5
         self.p.ChangeDutyCycle(dutyCycle)
         return
