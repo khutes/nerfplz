@@ -3,6 +3,7 @@ from config import motor_config as mcfg
 from car import motor
 import time
 
+
 class Car:
     motors = {}
 
@@ -75,7 +76,7 @@ class Car:
         # Fire motor
         print("Called car.fire")
         self.motors["FireMotor"].bckwd()
-        time.sleep(3.0)
+        time.sleep(5.0)
         self.motors["FireMotor"].stop()
         return
 
