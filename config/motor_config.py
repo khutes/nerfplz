@@ -13,7 +13,7 @@ SERVO_ANGLE_INC = 1
 
 def init(car):
     # name, in1, in2, ena, init speed, min speed, max speed
-    car.addDC("BackMotor", 16, 20, 21, 40, 15, 100) # Flipped directions
+    car.addDC("BackMotor", 16, 20, 21, 80, 15, 100) # Flipped directions
     car.addDC("TurretMotor", 19, 13, 26, 15)
     car.addDC("FireMotor", 6, 5, 14, 100, 15)
 

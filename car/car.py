@@ -75,7 +75,7 @@ class Car:
         # Fire motor
         print("Called car.fire")
         self.motors["FireMotor"].bckwd()
-        time.sleep(5.0)
+        time.sleep(3.0)
         self.motors["FireMotor"].stop()
         return
 

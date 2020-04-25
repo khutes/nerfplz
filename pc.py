@@ -22,7 +22,7 @@ while True: # Change to True
         time.sleep(5)
 
 # Starting scripts on the pi
-while False:
+while True:
     try:
         ssh.execute()
         break
@@ -53,7 +53,7 @@ try:
     print("Opening camera feed...")
     time.sleep(1)
     camURL = "http://[" + str(cfg.HOST) + "]:" + str(cfg.CAMERA_PORT)
-    # webbrowser.open(camURL)
+    webbrowser.open(camURL)
 
 except Exception as e:
     print("Error operating client: " + str(e))
