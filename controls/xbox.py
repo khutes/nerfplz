@@ -44,21 +44,21 @@ def run():
 
 		trigger = cont.get_triggers()
 		if trigger > 0.2 : #Right Trigger
-			send_to_pi.messages(3, trigger)
-			pressed[3] = True
-			time.sleep(0.1)
-		elif pressed[3]:
-			send_to_pi.messages(3, 0)
-			pressed[3] = False
-			time.sleep(0.1)
-
-		if trigger < -0.3 : #Left Trigger
 			send_to_pi.messages(1, trigger)
 			pressed[1] = True
 			time.sleep(0.1)
 		elif pressed[1]:
 			send_to_pi.messages(1, 0)
 			pressed[1] = False
+			time.sleep(0.1)
+
+		if trigger < -0.3 : #Left Trigger
+			send_to_pi.messages(3, trigger)
+			pressed[3] = True
+			time.sleep(0.1)
+		elif pressed[3]:
+			send_to_pi.messages(3, 0)
+			pressed[3] = False
 			time.sleep(0.1)
 			
 		# handle joysticks

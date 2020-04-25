@@ -1,5 +1,5 @@
 from config import network_config as cfg
-
+import threading
 
 """
 Function will be used to parse through the message recieved by the Pi and 
@@ -7,13 +7,30 @@ perform the task indicated.
 """
 
 def parse(sock, car):
+    firing = False
+    threads = []
+    lock = threading.Lock()
 
     while True:
+        aliveThreads = []
+        for thread in threads:
+            thread.join(.01)
+            if not thread.isAlive():
+                firing = False
+            else:
+                aliveThreads.append(thread)
+        threads = aliveThreads
         try:
             msg = sock.receive()
 
             if msg == "fire":
-                car.fire()
+                lock.acquire()
+                if not Firing:
+                    firing = True
+                    t = threading.Thread(target=car.fire)
+                    threads.append(t)
+                    t.start()
+                lock.release()
             elif msg == "quit":
                 print("quit")
             else:
