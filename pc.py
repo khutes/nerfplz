@@ -22,7 +22,7 @@ while True: # Change to True
         continue
 
 # Starting scripts on the pi
-while False:
+while True:
     try:  
         ssh.execute()
         break
