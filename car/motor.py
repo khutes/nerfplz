@@ -84,10 +84,11 @@ class Servo:
         self.maxAngle = maxAngle
 
         GPIO.setup(self.pin, GPIO.OUT)
+        GPIO.output(self.pin, GPIO.LOW)
         self.p = GPIO.PWM(self.pin, mcfg.DEFAULT_HERTZ)
         dutyCycle = self.angle / 18 + 2.5
         self.p.start(dutyCycle)
-        time.sleep(0.5)
+        time.sleep(2)
         self.p.ChangeDutyCycle(0)
         return
 
