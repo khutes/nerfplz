@@ -77,18 +77,17 @@ class Servo:
     def __init__(self, name, GPIOpin, angle, minAngle, maxAngle, increment):
         self.name = name
         self.pin = GPIOpin
-        self.angle = angle
         self.increment = increment
 
         self.minAngle = minAngle
         self.maxAngle = maxAngle
+        self.setAngle(angle)
+        dutyCycle = self.angle / 18 + 2.5
 
         GPIO.setup(self.pin, GPIO.OUT)
-        GPIO.output(self.pin, GPIO.LOW)
         self.p = GPIO.PWM(self.pin, mcfg.DEFAULT_HERTZ)
-        dutyCycle = self.angle / 18 + 2.5
         self.p.start(dutyCycle)
-        time.sleep(2)
+        self.p.ChangeDutyCycle(dutyCycle)
         self.p.ChangeDutyCycle(0)
         return
 
