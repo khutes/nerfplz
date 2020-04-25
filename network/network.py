@@ -19,6 +19,8 @@ class Socket:
 
     def send(self, msg):
         totalsent = 0
+        msg = msg[:6]
+        print(msg)
         MSGLEN = len(msg)
         msg = str(MSGLEN) + "x" + msg
         msg = msg.encode()

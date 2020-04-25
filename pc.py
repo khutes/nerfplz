@@ -36,9 +36,8 @@ try:
     msgcfg.setSocket(socket)
 
     try:
-        cont = xboxCont.Controller()
         print("Using xbox controller...")
-        t = threading.Thread(target=xbox.run, args=(cont,))
+        t = threading.Thread(target=xbox.run)
         threads.append(t)
         t.start()
     except Exception as e:

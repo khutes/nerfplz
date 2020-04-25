@@ -17,7 +17,7 @@ def parse(sock, car):
             elif msg == "quit":
                 print("quit")
             else:
-                value = int(msg[2:])
+                value = float(msg[2:])
                 if "fd" in msg:
                     if value == 0:
                         car.stop("BackMotor")

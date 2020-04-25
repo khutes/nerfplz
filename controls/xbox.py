@@ -7,7 +7,7 @@ from config import controller_config as controller
 from config import messages_config as send_to_pi
 
 
-def run(cont):
+def run():
 	pygame.init()
 
 	# REFRESH_RATE = 20
@@ -19,10 +19,10 @@ def run(cont):
 	screen = pygame.display.set_mode((100,100))
 
 	# make a controller
-	# cont = controller.Controller()
+	cont = controller.Controller()
 
 	# Game Loop
-	done = True
+	done = False
 	# for testing purposes
 	# test = input("Enter anything: ")
 	# send_to_pi.messages(9, 0)
