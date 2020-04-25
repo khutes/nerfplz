@@ -16,11 +16,13 @@ threads = []
 while True: # Change to True
     try:
         cfg.init()
-        # break
+        break
     except Exception as e:
         print("Error obtaining raspberry pi address. Retrying...")
         continue
-    # Starting scripts on the pi
+
+# Starting scripts on the pi
+while True:
     try:  
         ssh.execute()
         break
