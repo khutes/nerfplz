@@ -36,14 +36,15 @@ try:
     msgcfg.setSocket(socket)
 
     try:
-        print("Using xbox controller...")
+        print("Trying xbox controller...")
         t = threading.Thread(target=xbox.run)
         threads.append(t)
         t.start()
-        time.sleep(1.0)
+        t.join(1.0)
+        if not t.isAlive():
+            raise Exception
     except Exception as e:
         print("No xbox controller detected\nUsing keyboard controls...")
-        print("Using keyboard...")
         t = threading.Thread(target = keyboard.run)
         threads.append(t)
         t.start()
@@ -51,7 +52,7 @@ try:
     # Creating the camera feed
     print("Opening camera feed...")
     camURL = "http://[" + str(cfg.HOST) + "]:" + str(cfg.CAMERA_PORT)
-    # webbrowser.open(camURL)
+    webbrowser.open(camURL)
 
 except Exception as e:
     print("Error operating client: " + str(e))

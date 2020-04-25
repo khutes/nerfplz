@@ -19,8 +19,13 @@ def run():
 	screen = pygame.display.set_mode((100,100))
 
 	# make a controller
-	cont = controller.Controller()
+	try:
+		cont = controller.Controller()
+	except Exception as e:
+		pygame.quit()
+		return
 
+	print("Xbox controller connected")
 	# Game Loop
 	done = False
 	# for testing purposes
