@@ -22,6 +22,9 @@ class Ssh_Util:
         # self.pkey = cfg.PKEY
         self.port = cfg.PORT
 
+    def __del__(self):
+        self.client.close()
+
     def connect(self):
         "Login to the remote server"
         try:
@@ -71,16 +74,13 @@ class Ssh_Util:
                         result_flag = False
                     else:
                         print("Server Running...")
-                self.client.close()
             else:
                 print("Could not establish SSH connection")
                 result_flag = False
         except socket.timeout:
             print("Server running...")
-            self.client.close()
         except paramiko.SSHException:
             print("Failed to execute the command!", command)
-            self.client.close()
             result_flag = False
 
         return result_flag
@@ -95,7 +95,9 @@ def execute():
     #Execute commands
     if ssh_obj.execute_command(ssh_obj.commands) is False:
         raise Exception()
-    
+    else:
+        return ssh_obj
+
 # Shut down processes on raspberry pi to clear up ports
 def killServer():
     #Initialize the ssh object
