@@ -33,13 +33,13 @@ class Car:
     def driveBackward(self, factor):
         # Back motor backward
         print("Called car.driveBackward")
-        self.motors["BackMotor"].bckwd()
+        self.motors["BackMotor"].bckwd(factor)
         return
 
     def steerLeft(self, factor):
         # Front servo forwrad
         print("Called car.steerLeft")
-        self.motors["FrontServo"].fwd()
+        self.motors["FrontServo"].fwd(factor)
         return
 
     def steerRight(self, factor):

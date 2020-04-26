@@ -31,7 +31,7 @@ class DC:
 
     def fwd(self, speed=None):
         if speed is not None and abs(speed) > 0:
-            self.setSpeed(int(100 * abs(speed)))
+            self.setSpeed(int(self.maxSpeed * abs(speed)))
         self.p.ChangeDutyCycle(self.speed)
         GPIO.output(self.in1, GPIO.LOW)
         GPIO.output(self.in2, GPIO.HIGH)
@@ -39,7 +39,7 @@ class DC:
 
     def bckwd(self, speed=None):
         if speed is not None and abs(speed) > 0:
-            self.setSpeed(int(100 * abs(speed)))
+            self.setSpeed(int(self.maxSpeed * abs(speed)))
         self.p.ChangeDutyCycle(self.speed)
         GPIO.output(self.in2, GPIO.LOW)
         GPIO.output(self.in1, GPIO.HIGH)
