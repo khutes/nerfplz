@@ -85,6 +85,12 @@ class Car:
         self.motors[motor].stop()
         return
 
+    def reset(self):
+        mList = list(self.motors.keys())
+        for motor in mList:
+            self.motors[motor].reset()
+        return
+
     def printMotors(self):
         print(self.motors)
         return

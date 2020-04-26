@@ -10,6 +10,7 @@ threads = []
 
 msgSock = network.createMessageServer()
 car = car.Car()
+car.reset()
 
 t = threading.Thread(target=parser.parse, args=(msgSock, car,))
 threads.append(t)

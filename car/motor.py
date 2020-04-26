@@ -65,6 +65,9 @@ class DC:
         self.increment = increment
         return
 
+    def reset(self):
+        return
+
     def stop(self):
         GPIO.output(self.in1, GPIO.LOW)
         GPIO.output(self.in2, GPIO.LOW)
@@ -129,6 +132,14 @@ class Servo:
     
     def setIncrement(self, increment):
         self.increment = increment
+        return
+
+    def reset(self):
+        self.setAngle(90)
+        dutyCycle = self.angle / 18 + 2.5
+        self.p.ChangeDutyCycle(dutyCycle)
+        time.sleep(1.0)
+        self.p.ChangeDutyCycle(0)
         return
 
     def stop(self):
