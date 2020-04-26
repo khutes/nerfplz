@@ -27,7 +27,7 @@ class Car:
     def driveForward(self, factor):
         # Back motor forward
         print("Called car.driveForward")
-        self.motors["BackMotor"].fwd()
+        self.motors["BackMotor"].fwd(factor)
         return
 
     def driveBackward(self, factor):
@@ -45,31 +45,31 @@ class Car:
     def steerRight(self, factor):
         # Front servo backward
         print("Called car.steerRight")
-        self.motors["FrontServo"].bckwd()
+        self.motors["FrontServo"].bckwd(factor)
         return
 
     def lookLeft(self, factor):
         # Turret servo forward
         print("Called car.lookLeft")
-        self.motors["TurretMotor"].fwd()
+        self.motors["TurretMotor"].fwd(factor)
         return
 
     def lookRight(self, factor):
         # Turret servo backward
         print("Called car.lookRight")
-        self.motors["TurretMotor"].bckwd()
+        self.motors["TurretMotor"].bckwd(factor)
         return
 
     def lookUp(self, factor):
         # Tilt servo up
         print("Called car.lookUp")
-        self.motors["TiltServo"].fwd()
+        self.motors["TiltServo"].fwd(factor)
         return
 
     def lookDown(self, factor):
         # Tilt servo down
         print("Called car.lookDown")
-        self.motors["TiltServo"].bckwd()
+        self.motors["TiltServo"].bckwd(factor)
         return
 
     def fire(self):
