@@ -44,3 +44,6 @@ def messages(input, value):
 	if input == 9: #Fire
 		msg = "fire"	
 		__sock.send(msg)
+	if input == 10:  #Reset
+		msg = "reset"
+		__sock.send(msg)

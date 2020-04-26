@@ -33,6 +33,8 @@ def parse(sock, car):
                 lock.release()
             elif msg == "quit":
                 print("quit")
+            elif msg == "reset":
+                car.reset()
             else:
                 value = float(msg[2:])
                 if "fd" in msg:

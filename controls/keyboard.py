@@ -42,7 +42,10 @@ def run():
 				time.sleep(0.1)					
 			if keys[pygame.K_SPACE]:
 				send_to_pi.messages(9, 0)
-				time.sleep(0.1)					
+				time.sleep(0.1)
+			if keys[pygame.K_r]:
+				send_to_pi.messages(10, 0)
+				time.sleep(0.1)				
 			pygame.event.pump()			
 			for event in pygame.event.get():
 				if event.type == pygame.QUIT:

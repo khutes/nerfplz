@@ -42,7 +42,9 @@ def run():
 			# handle events for specific buttons
 			if event.type == pygame.JOYBUTTONDOWN: #add button up
 				if event.button == controller.RIGHT_BUMP: #Fire
-					send_to_pi.messages(9,0)		
+					send_to_pi.messages(9, 0)
+				if event.button == controller.LEFT_BUMP:  #Reset
+					send_to_pi.messages(10,0)
 				if event.button == controller.BACK: #Quit
 					send_to_pi.messages(0,0)				
 					done=True					
