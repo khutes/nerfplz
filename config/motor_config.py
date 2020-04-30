@@ -26,7 +26,7 @@ def init(car):
     # name, GPIO, init angle, min angle, max angle, increment
     # car.addServo("FrontServo", GPIOin=5, minAngle=45, maxAngle=135, increment=5)
 
-    # car.addServo("TiltServo", GPIOin=17, minAngle=75, increment=5)
+    car.addServo("TiltServo", GPIOin=26, minAngle=75, increment=5)
 
     car.printMotors()
     return
