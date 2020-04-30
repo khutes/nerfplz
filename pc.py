@@ -14,7 +14,7 @@ threads = []
 ssh_obj = None
 
 # Find the pi on the network
-while False: # Change to True
+while True: # Change to True
     try:
         cfg.init()
         break
@@ -23,7 +23,7 @@ while False: # Change to True
         continue
 
 # Starting scripts on the pi
-while False:
+while True:
     try:  
         ssh_obj = ssh.execute()
         break
@@ -53,7 +53,7 @@ try:
     # Creating the camera feed
     print("Opening camera feed...")
     camURL = "http://[" + str(cfg.HOST) + "]:" + str(cfg.CAMERA_PORT)
-    # webbrowser.open(camURL)
+    webbrowser.open(camURL)
 
 except Exception as e:
     print("Error operating client: " + str(e))
