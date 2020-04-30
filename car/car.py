@@ -58,15 +58,15 @@ class Car:
         return
 
     def lookLeft(self, factor):
-        # Turret servo forward
-        if not self.motorsRunning["TurrretMotor"]:
+        # Turret motor forward
+        if not self.motorsRunning["TurretMotor"]:
             self.motorsRunning["TurretMotor"] = True
             print("Called car.lookLeft")
             self.motors["TurretMotor"].fwd(factor)
         return
 
     def lookRight(self, factor):
-        # Turret servo backward
+        # Turret motor backward
         if not self.motorsRunning["TurrretMotor"]:
             self.motorsRunning["TurretMotor"] = True
             print("Called car.lookRight")
