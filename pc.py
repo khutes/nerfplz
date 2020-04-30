@@ -14,7 +14,7 @@ threads = []
 ssh_obj = None
 
 # Find the pi on the network
-while True: # Change to True
+while False: # Change to True
     try:
         cfg.init()
         break
@@ -23,7 +23,7 @@ while True: # Change to True
         continue
 
 # Starting scripts on the pi
-while True:
+while False:
     try:  
         ssh_obj = ssh.execute()
         break

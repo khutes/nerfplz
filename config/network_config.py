@@ -6,7 +6,7 @@ the commands to execute, upload and download file path details.
 """
 
 #Server credential details needed for ssh 
-HOST = ''
+HOST = 'fe80::6a35:49:7c3c:efcd'
 HOSTNAME = 'raspberrypi'
 USERNAME='pi'
 PASSWORD='raspberry'
