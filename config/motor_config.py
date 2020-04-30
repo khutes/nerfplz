@@ -18,7 +18,7 @@ def init(car):
     car.addDC("BackMotor", GPIOin1=4, GPIOin2=27, GPIOen=22,
               speed=60, minS=15, maxS=75)  # Flipped directions
 
-    car.addDC("TurretMotor", GPIOin1=13, GPIOin2=6, GPIOen=5, speed=65, maxS=65)
+    car.addDC("TurretMotor", GPIOin1=13, GPIOin2=6, GPIOen=5, speed=15, maxS=15)
 
     car.addDC("FireMotor", GPIOin1=23, GPIOin2=24,
               GPIOen=18, speed=100, minS=15)
