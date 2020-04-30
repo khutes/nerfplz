@@ -10,6 +10,7 @@ class Car:
     def __init__(self):
         # Add motors
         mcfg.init(self)
+        self.firing = False
         return
 
     def __del__(self):
@@ -74,10 +75,14 @@ class Car:
 
     def fire(self):
         # Fire motor
-        print("Called car.fire")
-        self.motors["FireMotor"].bckwd()
-        time.sleep(5.0)
-        self.motors["FireMotor"].stop()
+        if (self.firing):
+            self.motors["FireMotor"].stop()
+            self.firing = False
+        else:
+            print("Called car.fire")
+            self.firing = True
+            self.motors["FireMotor"].bckwd()
+            time.sleep(2)
         return
 
     def stop(self, motor):
