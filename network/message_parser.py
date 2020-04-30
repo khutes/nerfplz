@@ -22,7 +22,7 @@ def parse(sock, car):
         threads = aliveThreads
         try:
             msg = sock.receive()
-
+            print(msg)
             if msg == "fire":
                 lock.acquire()
                 if not firing:
