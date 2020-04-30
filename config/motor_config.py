@@ -11,6 +11,8 @@ SERVO_MIN_ANGLE = 45
 SERVO_MAX_ANGLE = 135
 SERVO_ANGLE_INC = 1
 
+# minAngle=55, maxAngle=125
+
 def init(car):
     # name, in1, in2, ena, init speed, min speed, max speed
     # car.addDC("BackMotor", GPIOin1=25, GPIOin2=12, GPIOen=8,
@@ -22,7 +24,7 @@ def init(car):
     #           GPIOen=18, speed=100, minS=15)
 
     # name, GPIO, init angle, min angle, max angle, increment
-    car.addServo("FrontServo", GPIOin=4, minAngle=55, maxAngle=125, increment=5)
+    car.addServo("FrontServo", GPIOin=4, minAngle=45, maxAngle=135, increment=5)
 
     car.addServo("TiltServo", GPIOin=5, minAngle=75, increment=5)
 
