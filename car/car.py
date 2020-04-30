@@ -11,6 +11,10 @@ class Car:
         # Add motors
         mcfg.init(self)
         self.firing = False
+        self.motorsRunning = {}
+        mList = list(self.motors.keys())
+        for motor in mList:
+            self.motorsRunning[motor] = False
         return
 
     def __del__(self):
@@ -27,14 +31,18 @@ class Car:
 
     def driveForward(self, factor):
         # Back motor forward
-        # print("Called car.driveForward")
-        self.motors["BackMotor"].fwd(factor)
+        if not self.motorsRunning["BackMotor"]:
+            self.motorsRunning["BackMotor"] = True
+            print("Called car.driveForward")
+            self.motors["BackMotor"].fwd(factor)
         return
 
     def driveBackward(self, factor):
         # Back motor backward
-        # print("Called car.driveBackward")
-        self.motors["BackMotor"].bckwd(factor)
+        if not self.motorsRunning["BackMotor"]:
+            self.motorsRunning["BackMotor"] = True
+            # print("Called car.driveBackward")
+            self.motors["BackMotor"].bckwd(factor)
         return
 
     def steerLeft(self, factor):
@@ -51,14 +59,18 @@ class Car:
 
     def lookLeft(self, factor):
         # Turret servo forward
-        # print("Called car.lookLeft")
-        self.motors["TurretMotor"].fwd(factor)
+        if not self.motorsRunning["TurrretMotor"]:
+            self.motorsRunning["TurretMotor"] = True
+            print("Called car.lookLeft")
+            self.motors["TurretMotor"].fwd(factor)
         return
 
     def lookRight(self, factor):
         # Turret servo backward
-        # print("Called car.lookRight")
-        self.motors["TurretMotor"].bckwd(factor)
+        if not self.motorsRunning["TurrretMotor"]:
+            self.motorsRunning["TurretMotor"] = True
+            print("Called car.lookRight")
+            self.motors["TurretMotor"].bckwd(factor)
         return
 
     def lookUp(self, factor):
@@ -75,20 +87,26 @@ class Car:
 
     def fire(self):
         # Fire motor
-        if (self.firing):
+        if self.motorsRunning["FireMotor"]:
+            self.motorsRunning["TurretMotor"] = False
             self.motors["FireMotor"].stop()
-            self.firing = False
             time.sleep(1)
         else:
             print("Called car.fire")
-            self.firing = True
+            self.motorsRunning["FireMotor"] = True
             self.motors["FireMotor"].bckwd()
             time.sleep(1)
         return
 
     def stop(self, motor):
-        # print("Stopped " + str(motor))
-        self.motors[motor].stop()
+        if motor == "BackMotor" or motor == "TurretMotor":
+            if self.motorsRunning[motor] == True:
+                self.motors[motor].stop()
+                self.motorsRunning[motor] = False
+                print("Stopped " + str(motor))
+        else:
+            # print("Stopped " + str(motor))
+            self.motors[motor].stop()
         return
 
     def reset(self):
