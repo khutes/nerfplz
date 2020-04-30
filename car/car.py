@@ -67,7 +67,7 @@ class Car:
 
     def lookRight(self, factor):
         # Turret motor backward
-        if not self.motorsRunning["TurrretMotor"]:
+        if not self.motorsRunning["TurretMotor"]:
             self.motorsRunning["TurretMotor"] = True
             print("Called car.lookRight")
             self.motors["TurretMotor"].bckwd(factor)
