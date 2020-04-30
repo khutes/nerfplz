@@ -6,10 +6,10 @@ the commands to execute, upload and download file path details.
 """
 
 #Server credential details needed for ssh 
-HOST = 'fe80::6a35:49:7c3c:efcd'
-HOSTNAME = 'raspberrypi'
+HOST = ''
+HOSTNAME = 'nerfpi'
 USERNAME='pi'
-PASSWORD='raspberry'
+PASSWORD='pi'
 PORT = 22
 MESSAGE_PORT = 8080
 CAMERA_PORT = 8000

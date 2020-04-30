@@ -14,7 +14,7 @@ threads = []
 ssh_obj = None
 
 # Find the pi on the network
-while False: # Change to True
+while True: # Change to True
     try:
         cfg.init()
         break
