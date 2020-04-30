@@ -5,6 +5,8 @@ from config import network_config as cfg
 from car import car
 from nerfCamera import httpServer as camServ
 import threading
+import RPi.GPIO as GPIO
+
 
 threads = []
 
@@ -20,3 +22,5 @@ camServ.startCameraFeed()
 
 for t in threads:
     t.join()
+
+GPIO.cleanup()
