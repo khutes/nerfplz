@@ -78,11 +78,12 @@ class Car:
         if (self.firing):
             self.motors["FireMotor"].stop()
             self.firing = False
+            time.sleep(1)
         else:
             print("Called car.fire")
             self.firing = True
             self.motors["FireMotor"].bckwd()
-            time.sleep(2)
+            time.sleep(1)
         return
 
     def stop(self, motor):
